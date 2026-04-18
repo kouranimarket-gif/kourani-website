@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Kourani Market Ltd – For Businesses</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="Business food supply support for restaurants, takeaways and small food businesses in Farnworth, Bolton and nearby areas. Start your business supply request and send your first stock needs."
+  />
+
+  <style>
+    :root {
+      --primary: #145c40;
+      --primary-dark: #0f3f2c;
+      --primary-light: #1f8a5f;
+      --accent: #f4b41a;
+      --bg: #f6f8f7;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --shadow: 0 14px 34px rgba(15, 23, 42, 0.08);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top right, rgba(244,180,26,0.12), transparent 26%),
+        radial-gradient(circle at left center, rgba(31,138,95,0.10), transparent 24%),
+        var(--bg);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    header {
+      background:
+        radial-gradient(circle at top right, rgba(255,255,255,0.12), transparent 28%),
+        linear-gradient(135deg, var(--primary-dark), var(--primary-light));
+      color: #fff;
+      padding: 18px 16px 34px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .logo-text {
+      font-weight: 800;
+      font-size: 1.2rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: #fff;
+    }
+
+    .logo-img {
+      height: 48px;
+      width: auto;
+      filter: drop-shadow(0 0 8px rgba(255,255,255,0.55));
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      font-size: 0.92rem;
+    }
+
+    .nav-links a {
+      color: #e8f6ee;
+      padding: 6px 10px;
+      border-radius: 999px;
+      transition: 0.16s ease-in-out;
+    }
+
+    .nav-links a:hover {
+      background: rgba(255,255,255,0.12);
+      transform: translateY(-1px);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(300px, 0.9fr);
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+    }
+
+    .hero-main,
+    .hero-side {
+      border-radius: var(--radius);
+      padding: 22px;
+    }
+
+    .hero-main {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.16);
+      backdrop-filter: blur(4px);
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.18);
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .hero-title {
+      font-size: clamp(1.95rem, 2vw + 1rem, 2.8rem);
+      line-height: 1.08;
+      font-weight: 800;
+      margin-bottom: 12px;
+      max-width: 14ch;
+    }
+
+    .hero-subtitle {
+      font-size: 0.98rem;
+      color: #edf8f2;
+      margin-bottom: 16px;
+      max-width: 62ch;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .badge {
+      font-size: 0.82rem;
+      padding: 5px 11px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.35);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .hero-note {
+      font-size: 0.92rem;
+      color: #ddf1e6;
+      max-width: 58ch;
+    }
+
+    .hero-side {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.16);
+      color: #fff;
+    }
+
+    .hero-side h3 {
+      font-size: 1.08rem;
+      margin-bottom: 8px;
+    }
+
+    .hero-side p {
+      color: #ebf7f1;
+      font-size: 0.93rem;
+      margin-bottom: 10px;
+    }
+
+    .hero-list {
+      list-style: none;
+      display: grid;
+      gap: 8px;
+      font-size: 0.92rem;
+      color: #eef9f3;
+    }
+
+    .hero-list li::before {
+      content: "✓ ";
+      font-weight: 800;
+    }
+
+    main {
+      padding: 26px 0 48px;
+    }
+
+    .offer-box {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding: 16px 18px;
+      border-radius: 18px;
+      border: 1px solid #f0dda0;
+      background: linear-gradient(135deg, #fff7df, #fffdf6);
+      box-shadow: 0 10px 24px rgba(244,180,26,0.12);
+      margin-bottom: 22px;
+    }
+
+    .offer-box strong {
+      display: block;
+      color: #5b4708;
+      margin-bottom: 2px;
+    }
+
+    .offer-box span {
+      color: #6f5b17;
+      font-size: 0.92rem;
+    }
+
+    .btn-offer,
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-size: 0.95rem;
+      font-weight: 800;
+      transition: 0.16s ease-in-out;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .btn:hover,
+    .btn-offer:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-offer,
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-offer:hover,
+    .btn-primary:hover {
+      background: #0f4b33;
+    }
+
+    .btn-soft {
+      background: #ecf7f1;
+      color: var(--primary);
+      border-color: #cfe6dc;
+    }
+
+    .btn-soft:hover {
+      background: #dff0e8;
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    @media (max-width: 860px) {
+      .intro-grid { grid-template-columns: 1fr; }
+    }
+
+    .intro-card {
+      background: rgba(255,255,255,0.96);
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.92);
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .intro-card strong {
+      display: block;
+      color: var(--primary);
+      margin-bottom: 5px;
+    }
+
+    .intro-card p {
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    .tabs {
+      display: inline-flex;
+      gap: 8px;
+      background: #eff6f2;
+      padding: 6px;
+      border-radius: 999px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      appearance: none;
+      border: none;
+      background: transparent;
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 0.92rem;
+      padding: 10px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: 0.16s ease-in-out;
+    }
+
+    .tab-btn.active {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 8px 16px rgba(15,63,44,0.16);
+    }
+
+    .panel {
+      display: none;
+      background: rgba(255,255,255,0.96);
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.9);
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .panel.active {
+      display: block;
+    }
+
+    .panel-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr);
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    @media (max-width: 860px) {
+      .panel-head { grid-template-columns: 1fr; }
+    }
+
+    .panel h2 {
+      font-size: 1.45rem;
+      margin-bottom: 6px;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 60ch;
+    }
+
+    .quick-points {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .quick-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #eef8f3;
+      border: 1px solid #d6ede2;
+      color: var(--primary);
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
+    .mini-info,
+    .helper-box {
+      border-radius: 18px;
+      padding: 16px;
+      font-size: 0.92rem;
+    }
+
+    .mini-info {
+      background: #f8fbf9;
+      border: 1px solid #e2efe8;
+      color: #40574f;
+    }
+
+    .mini-info strong,
+    .helper-box strong {
+      display: block;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .helper-box {
+      margin-top: 16px;
+      background: linear-gradient(135deg, #fffdf7, #f8fbf9);
+      border: 1px solid #e8efe9;
+      color: #4b5563;
+    }
+
+    .helper-steps {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .helper-step {
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: #fff;
+      border: 1px solid #eef2ef;
+      font-size: 0.9rem;
+    }
+
+    .helper-step strong {
+      display: inline;
+      margin-right: 6px;
+    }
+
+    .info-banner {
+      margin-bottom: 16px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: #ecf7f1;
+      border: 1px solid #d7ece1;
+      color: #27483c;
+      font-size: 0.93rem;
+    }
+
+    .info-banner strong {
+      color: var(--primary);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 14px;
+    }
+
+    @media (max-width: 760px) {
+      .form-grid { grid-template-columns: 1fr; }
+    }
+
+    .form-group.full { grid-column: 1 / -1; }
+
+    .form-group label {
+      display: block;
+      font-size: 0.92rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 11px 12px;
+      border-radius: 14px;
+      border: 1px solid #d1d5db;
+      background: #fff;
+      font-family: inherit;
+      font-size: 0.94rem;
+      color: var(--text);
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .form-group textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary-light);
+      box-shadow: 0 0 0 3px rgba(31,138,95,0.12);
+    }
+
+    .form-group small {
+      display: block;
+      margin-top: 5px;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .section-divider {
+      margin: 18px 0 14px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-divider h3 {
+      font-size: 1.02rem;
+      margin-bottom: 4px;
+    }
+
+    .section-divider p {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .request-table-wrap {
+      overflow-x: auto;
+      margin-top: 8px;
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      background: #fff;
+    }
+
+    .request-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 760px;
+    }
+
+    .request-table th,
+    .request-table td {
+      border-bottom: 1px solid #edf2f7;
+      padding: 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .request-table th {
+      background: #f8fafc;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #475569;
+      font-weight: 800;
+    }
+
+    .request-table td input {
+      margin: 0;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    footer {
+      background: #111827;
+      color: #d1d5db;
+      padding: 18px 0;
+      font-size: 0.82rem;
+      margin-top: 24px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .footer-small { color: #9ca3af; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav class="nav">
+        <a href="index.html" class="logo-text" aria-label="Back to home">
+          <img src="kourani-logo.png" alt="Kourani Market Logo" class="logo-img">
+          Kourani Market Ltd
+        </a>
+
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="catalogue.html">Catalogue</a>
+          <a href="products.html">Products</a>
+          <a href="businesses.html">For Businesses</a>
+        </div>
+      </nav>
+
+      <section class="hero">
+        <div class="hero-main">
+          <div class="hero-kicker">Business supply • Bolton & nearby areas</div>
+          <h1 class="hero-title">Start your business supply request the simple way</h1>
+          <p class="hero-subtitle">
+            We work with restaurants, takeaways and small food businesses through a personalised ordering setup.
+            First, send us your business details and your first stock needs. Then we review your request and prepare the right next step.
+          </p>
+
+          <div class="hero-badges">
+            <span class="badge">Restaurants</span>
+            <span class="badge">Takeaways</span>
+            <span class="badge">Flexible supply</span>
+            <span class="badge">Personalised order pages</span>
+          </div>
+
+          <p class="hero-note">
+            The goal is simple: clear first contact, practical review, then a faster repeat-order system once your business is approved.
+          </p>
+        </div>
+
+        <aside class="hero-side">
+          <h3>How the business setup works</h3>
+          <p>We keep the first stage simple so you can tell us what your business needs without confusion.</p>
+          <ul class="hero-list">
+            <li>Send your business details</li>
+            <li>Tell us your first stock needs</li>
+            <li>We review and personalise your setup</li>
+            <li>Approved customers receive a direct order link</li>
+          </ul>
+        </aside>
+      </section>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <section class="offer-box" aria-label="Business offer">
+        <div>
+          <strong>New business supply support</strong>
+          <span>Local restaurants and takeaways can send a first request now so we can review stock needs, delivery fit and business setup.</span>
+        </div>
+        <a href="#new-business" class="btn-offer">Get started</a>
+      </section>
+
+      <section class="intro-grid">
+        <div class="intro-card">
+          <strong>Clear first step</strong>
+          <p>New businesses can contact us and send a first request without needing a full client setup first.</p>
+        </div>
+        <div class="intro-card">
+          <strong>Personalised follow-up</strong>
+          <p>We review what you need, then prepare the right order structure for your business.</p>
+        </div>
+        <div class="intro-card">
+          <strong>Built for repeat orders</strong>
+          <p>Approved customers receive their own direct business order page for faster future ordering.</p>
+        </div>
+      </section>
+
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="new-business">New business enquiry</button>
+        <button class="tab-btn" data-tab="existing-business">Existing business customer</button>
+      </div>
+
+      <section id="new-business" class="panel active">
+        <div class="panel-head">
+          <div>
+            <h2>Tell us about your business and your first stock needs</h2>
+            <p class="lead">
+              This form is for first contact and initial supply setup. Send us your business details and your first request.
+              We will review it, then come back to you with the right next step and, if suitable, prepare your personalised order setup.
+            </p>
+
+            <div class="quick-points">
+              <span class="quick-pill">New restaurant</span>
+              <span class="quick-pill">New takeaway</span>
+              <span class="quick-pill">Supply enquiry</span>
+              <span class="quick-pill">First stock request</span>
+            </div>
+          </div>
+
+          <div class="mini-info">
+            <strong>Why this matters</strong>
+            This first request helps us understand what your business buys, how often you need stock, and whether delivery or collection makes the most sense before we create your personalised ordering flow.
+          </div>
+        </div>
+
+        <div class="info-banner">
+          <strong>How we work:</strong> first you send your enquiry and first stock request. Then we review your needs. If we move forward together, we prepare your personalised order setup and send your direct business order link.
+        </div>
+
+        <form
+          method="POST"
+          action="https://formsubmit.co/kouranimarket@gmail.com"
+          autocomplete="off"
+        >
+          <input type="hidden" name="_subject" value="New business supply request - Kourani Market Ltd">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="basic">
+          <input type="hidden" name="_next" value="https://kourani-market-ltd.netlify.app/businesses-thank-you.html">
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="newName">Full name *</label>
+              <input id="newName" name="Full name" required>
+            </div>
+
+            <div class="form-group">
+              <label for="newBusinessName">Business name *</label>
+              <input id="newBusinessName" name="Business name" required>
+            </div>
+
+            <div class="form-group">
+              <label for="newPhone">Phone *</label>
+              <input id="newPhone" name="Phone" required>
+            </div>
+
+            <div class="form-group">
+              <label for="newEmail">Email *</label>
+              <input id="newEmail" name="Email" type="email" required>
+            </div>
+
+            <div class="form-group full">
+              <label for="businessAddress">Business full address (include street, city) *</label>
+              <textarea id="businessAddress" name="Business full address" placeholder="Full business address" required></textarea>
+              <small>We use this to understand your location properly before we prepare the next step.</small>
+            </div>
+
+            <div class="form-group">
+              <label for="postcode">Postcode *</label>
+              <input id="postcode" name="Postcode" required>
+            </div>
+
+            <div class="form-group">
+              <label for="businessType">Business type *</label>
+              <select id="businessType" name="Business type" required>
+                <option value="">Choose…</option>
+                <option value="Restaurant">Restaurant</option>
+                <option value="Takeaway">Takeaway</option>
+                <option value="Food shop">Food shop</option>
+                <option value="Small catering business">Small catering business</option>
+                <option value="Other food business">Other food business</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="orderFrequency">Expected order frequency *</label>
+              <select id="orderFrequency" name="Expected order frequency" required>
+                <option value="">Choose…</option>
+                <option value="Daily">Daily</option>
+                <option value="Several times a week">Several times a week</option>
+                <option value="Weekly">Weekly</option>
+                <option value="Fortnightly">Fortnightly</option>
+                <option value="Not sure yet">Not sure yet</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="servicePreference">Collection or delivery? *</label>
+              <select id="servicePreference" name="Collection or delivery" required>
+                <option value="">Choose…</option>
+                <option value="Collection">Collection</option>
+                <option value="Delivery">Delivery</option>
+                <option value="Either / not sure yet">Either / not sure yet</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="section-divider">
+            <h3>Your first request</h3>
+            <p>Use this simple table to list the main products you want us to review first.</p>
+          </div>
+
+          <div class="form-group full">
+            <label>Main products for review</label>
+            <div class="request-table-wrap">
+              <table class="request-table">
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Code (optional)</th>
+                    <th>Pack size / size</th>
+                    <th>Quantity</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><input name="Product 1" placeholder="e.g. Chicken wings"></td>
+                    <td><input name="Code 1" placeholder="Optional"></td>
+                    <td><input name="Pack size 1" placeholder="e.g. 10kg box / pack of 24"></td>
+                    <td><input name="Qty 1" placeholder="e.g. 3 boxes"></td>
+                  </tr>
+                  <tr>
+                    <td><input name="Product 2" placeholder="e.g. Rice"></td>
+                    <td><input name="Code 2" placeholder="Optional"></td>
+                    <td><input name="Pack size 2" placeholder="e.g. 20kg bag"></td>
+                    <td><input name="Qty 2" placeholder="e.g. 4 bags"></td>
+                  </tr>
+                  <tr>
+                    <td><input name="Product 3"></td>
+                    <td><input name="Code 3"></td>
+                    <td><input name="Pack size 3"></td>
+                    <td><input name="Qty 3"></td>
+                  </tr>
+                  <tr>
+                    <td><input name="Product 4"></td>
+                    <td><input name="Code 4"></td>
+                    <td><input name="Pack size 4"></td>
+                    <td><input name="Qty 4"></td>
+                  </tr>
+                  <tr>
+                    <td><input name="Product 5"></td>
+                    <td><input name="Code 5"></td>
+                    <td><input name="Pack size 5"></td>
+                    <td><input name="Qty 5"></td>
+                  </tr>
+                  <tr>
+                    <td><input name="Product 6"></td>
+                    <td><input name="Code 6"></td>
+                    <td><input name="Pack size 6"></td>
+                    <td><input name="Qty 6"></td>
+                  </tr>
+                  <tr>
+                    <td><input name="Product 7"></td>
+                    <td><input name="Code 7"></td>
+                    <td><input name="Pack size 7"></td>
+                    <td><input name="Qty 7"></td>
+                  </tr>
+                  <tr>
+                    <td><input name="Product 8"></td>
+                    <td><input name="Code 8"></td>
+                    <td><input name="Pack size 8"></td>
+                    <td><input name="Qty 8"></td>
+                  </tr>
+                  <tr>
+                    <td><input name="Product 9"></td>
+                    <td><input name="Code 9"></td>
+                    <td><input name="Pack size 9"></td>
+                    <td><input name="Qty 9"></td>
+                  </tr>
+                  <tr>
+                    <td><input name="Product 10"></td>
+                    <td><input name="Code 10"></td>
+                    <td><input name="Pack size 10"></td>
+                    <td><input name="Qty 10"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <small>You can leave empty rows if not needed.</small>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group full">
+              <label for="comments">Comments / special requests</label>
+              <textarea id="comments" name="Comments / special requests" placeholder="Tell us about brands, substitutions, urgent items, delivery notes, sourcing requests, or anything important for your business."></textarea>
+            </div>
+          </div>
+
+          <div class="cta-row">
+            <button type="submit" class="btn btn-primary">Send first business request</button>
+          </div>
+        </form>
+
+        <div class="helper-box">
+          <strong>What happens next?</strong>
+          <div class="helper-steps">
+            <div class="helper-step"><strong>1.</strong> You send your business details and your first request.</div>
+            <div class="helper-step"><strong>2.</strong> We review what your business needs and whether we can support your area.</div>
+            <div class="helper-step"><strong>3.</strong> If suitable, we prepare your personalised business setup and next step.</div>
+            <div class="helper-step"><strong>4.</strong> Approved customers receive a direct business order page link for future ordering.</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="existing-business" class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>Already working with us?</h2>
+            <p class="lead">
+              Existing business customers do not use the standard public catalogue. Approved business clients receive a direct personalised order page link from us.
+            </p>
+
+            <div class="quick-points">
+              <span class="quick-pill">Direct order page</span>
+              <span class="quick-pill">Repeat orders</span>
+              <span class="quick-pill">Client-specific products</span>
+              <span class="quick-pill">Faster reordering</span>
+            </div>
+          </div>
+
+          <div class="mini-info">
+            <strong>Important</strong>
+            If you already have your direct business order page link, use that link to place orders. This page is only for requesting help, access support or a resend of your link.
+          </div>
+        </div>
+
+        <form
+          method="POST"
+          action="https://formsubmit.co/kouranimarket@gmail.com"
+          autocomplete="off"
+        >
+          <input type="hidden" name="_subject" value="Existing business customer request - Kourani Market Ltd">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="basic">
+          <input type="hidden" name="_next" value="https://kourani-market-ltd.netlify.app/businesses-thank-you.html">
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="existingBusinessName">Business name *</label>
+              <input id="existingBusinessName" name="Business name" required>
+            </div>
+
+            <div class="form-group">
+              <label for="existingContactName">Contact name *</label>
+              <input id="existingContactName" name="Contact name" required>
+            </div>
+
+            <div class="form-group">
+              <label for="existingPhone">Phone *</label>
+              <input id="existingPhone" name="Phone" required>
+            </div>
+
+            <div class="form-group">
+              <label for="existingEmail">Email *</label>
+              <input id="existingEmail" name="Email" type="email" required>
+            </div>
+
+            <div class="form-group">
+              <label for="accountRef">Account reference / customer code</label>
+              <input id="accountRef" name="Account reference" placeholder="Optional">
+            </div>
+
+            <div class="form-group">
+              <label for="requestType">What do you need? *</label>
+              <select id="requestType" name="Request type" required>
+                <option value="">Choose…</option>
+                <option value="Please resend my business order link">Please resend my business order link</option>
+                <option value="I need help accessing my order page">I need help accessing my order page</option>
+                <option value="I want to update my business page details">I want to update my business page details</option>
+                <option value="General support for existing business customer">General support for existing business customer</option>
+              </select>
+            </div>
+
+            <div class="form-group full">
+              <label for="existingMessage">Message</label>
+              <textarea id="existingMessage" name="Message" placeholder="Example: Please resend our direct order page link, or update our delivery day, or add new regular products."></textarea>
+            </div>
+          </div>
+
+          <div class="cta-row">
+            <button type="submit" class="btn btn-primary">Send existing customer request</button>
+          </div>
+        </form>
+
+        <div class="helper-box">
+          <strong>How the existing customer flow works</strong>
+          Once a new business is approved, the business receives a direct personalised order page. Existing customers then use that direct page for actual ordering, not the public customer catalogue.
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-small">Kourani Market Ltd – Food supply warehouse in Farnworth.</div>
+      <div class="footer-small">For restaurants, takeaways & food businesses.</div>
+    </div>
+  </footer>
+
+  <script>
+    const tabs = document.querySelectorAll('.tab-btn');
+    const panels = document.querySelectorAll('.panel');
+
+    tabs.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.dataset.tab;
+        tabs.forEach(b => b.classList.remove('active'));
+        panels.forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(target).classList.add('active');
+      });
+    });
+  </script>
+  <script>
+  const form = document.querySelector('form');
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+
+    try {
+      await fetch("/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: new URLSearchParams(formData).toString()
+      });
+
+      const data = Object.fromEntries(formData.entries());
+
+      await fetch("/.netlify/functions/send-business-request", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+
+      window.location.href = "/businesses-thank-you.html";
+
+    } catch (error) {
+      alert("Erreur lors de l’envoi.");
+      console.error(error);
+    }
+  });
+</script>
+</body>
+</html>

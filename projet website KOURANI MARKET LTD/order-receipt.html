@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Kourani Market Ltd – Order Receipt</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="View and print your Kourani Market Ltd order receipt for click & collect or local delivery from our Farnworth warehouse." />
+
+  <style>
+    :root {
+      --primary: #145c40;
+      --primary-dark: #0f3f2c;
+      --primary-light: #1f8a5f;
+      --accent: #f4b41a;
+      --accent-soft: #fff7de;
+      --bg: #f5f7f6;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --card-bg: #ffffff;
+      --border: #e5e7eb;
+      --shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(244,180,26,0.14), transparent 24%),
+        linear-gradient(180deg, #f4faf7 0%, #f5f7f6 100%);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    header {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
+      color: #fff;
+      padding: 18px 16px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 10px 24px rgba(15, 63, 44, 0.18);
+    }
+
+    .container {
+      max-width: 1020px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .logo-text {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #fff;
+    }
+
+    .logo-img {
+      height: 46px;
+      width: auto;
+      filter: drop-shadow(0 0 8px rgba(255,255,255,.55));
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .nav-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.18);
+      font-size: 0.9rem;
+      color: #eef8f2;
+    }
+
+    main { padding: 32px 0 48px; }
+
+    .page-shell {
+      display: grid;
+      grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.82fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .page-shell { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid rgba(20, 92, 64, 0.09);
+      border-radius: 24px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transform: translateY(14px);
+      animation: riseIn 0.55s ease-out forwards;
+    }
+
+    .card.delay { animation-delay: 0.08s; }
+
+    @keyframes riseIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .receipt-hero {
+      margin-bottom: 18px;
+      padding: 18px;
+      border-radius: 20px;
+      background:
+        linear-gradient(135deg, rgba(20,92,64,0.08), rgba(244,180,26,0.12));
+      border: 1px solid rgba(20,92,64,0.08);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(20,92,64,0.1);
+      color: var(--primary);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      font-size: clamp(1.8rem, 2vw + 1rem, 2.4rem);
+      line-height: 1.15;
+      margin-bottom: 8px;
+      color: #10231b;
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: 0.98rem;
+      max-width: 60ch;
+    }
+
+    .mini-badges {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .mini-badge {
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #fff;
+      border: 1px solid rgba(20,92,64,0.1);
+      font-size: 0.82rem;
+      color: #38544a;
+      font-weight: 600;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+      font-size: 0.95rem;
+      overflow: hidden;
+      border-radius: 16px;
+      background: #fff;
+    }
+
+    th, td {
+      border-bottom: 1px solid var(--border);
+      padding: 12px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    thead th {
+      background: #f8faf9;
+      font-weight: 800;
+      color: #334155;
+      font-size: 0.86rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    tbody tr:hover td {
+      background: #fbfcfc;
+    }
+
+    .total-row td {
+      font-weight: 800;
+      border-top: 2px solid #111827;
+      border-bottom: none;
+      background: #fcfcfc;
+    }
+
+    .receipt-meta {
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px dashed #d8dfdb;
+      display: grid;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .actions {
+      margin-top: 20px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 11px 16px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-secondary {
+      background: #f3f4f6;
+      color: #111827;
+      border-color: #e5e7eb;
+    }
+
+    .btn-soft {
+      background: var(--accent-soft);
+      color: #7a5610;
+      border-color: #f7dfa1;
+    }
+
+    .sidebar-card h2,
+    .loyalty-box h2 {
+      font-size: 1.08rem;
+      margin-bottom: 10px;
+      color: #10231b;
+    }
+
+    .summary-list {
+      display: grid;
+      gap: 10px;
+      font-size: 0.94rem;
+    }
+
+    .summary-item {
+      padding: 11px 12px;
+      border-radius: 16px;
+      background: #f8faf9;
+      border: 1px solid #edf1ef;
+    }
+
+    .summary-item strong {
+      display: block;
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #5b6b63;
+      margin-bottom: 4px;
+    }
+
+    .status-box,
+    .loyalty-box {
+      margin-top: 16px;
+      padding: 14px 15px;
+      border-radius: 18px;
+      border: 1px solid rgba(20,92,64,0.1);
+      background: #f8fcfa;
+    }
+
+    .status-box p,
+    .loyalty-box p,
+    .loyalty-box div {
+      font-size: 0.94rem;
+      color: #475569;
+    }
+
+    .loyalty-box {
+      background: linear-gradient(135deg, #eff9f4, #fffdf7);
+      border-color: #d8ece0;
+    }
+
+    .loyalty-box strong { color: var(--primary); }
+
+    .print-note {
+      margin-top: 14px;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .empty-state {
+      padding: 18px;
+      border-radius: 18px;
+      background: #fafafa;
+      border: 1px dashed #d1d5db;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    footer {
+      background: #111827;
+      color: #d1d5db;
+      padding: 18px 0;
+      font-size: 0.85rem;
+      margin-top: 20px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .footer-small { color: #9ca3af; }
+
+    @media print {
+      header, .actions, footer, .status-box, .print-note { display: none !important; }
+      body { background: #fff; }
+      main { padding: 0; }
+      .page-shell { grid-template-columns: 1fr; }
+      .card {
+        box-shadow: none;
+        border: none;
+        padding: 0;
+        animation: none;
+        opacity: 1;
+        transform: none;
+      }
+      .receipt-hero { background: none; border: none; padding: 0 0 12px; }
+      .sidebar-card { display: none; }
+    }
+  
+    .offer-banner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding: 14px 16px;
+      border-radius: 18px;
+      border: 1px solid #f0dda0;
+      background: linear-gradient(135deg, #fff7df, #fffdf6);
+      box-shadow: 0 10px 24px rgba(244,180,26,0.12);
+      margin-bottom: 18px;
+      animation: pulseOffer 1.8s infinite;
+    }
+
+    @keyframes pulseOffer {
+      0%, 100% { transform: scale(1); box-shadow: 0 10px 24px rgba(244,180,26,0.10); }
+      50% { transform: scale(1.01); box-shadow: 0 14px 28px rgba(244,180,26,0.18); }
+    }
+
+    .offer-banner strong {
+      color: #5b4708;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .offer-banner span {
+      color: #6f5b17;
+      font-size: 0.92rem;
+    }
+
+    .offer-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 800;
+      transition: 0.16s ease-in-out;
+    }
+
+    .offer-btn:hover {
+      background: #0f4b33;
+      transform: translateY(-1px);
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav class="nav">
+        <a href="index.html" class="logo-text" aria-label="Back to home">
+          <img src="kourani-logo.png" alt="Kourani Market Logo" class="logo-img">
+          Kourani Market
+        </a>
+
+        <div class="nav-actions">
+          <a class="nav-chip" href="products.html">🛍️ Products</a>
+          <a class="nav-chip" href="order-success.html">✅ Order status</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+  <div class="container">
+    <section class="offer-banner" aria-label="Offer">
+      <div>
+        <strong>Shop again anytime</strong>
+        <span>Use this receipt as a reference, then return to the products page for your next household order.</span>
+      </div>
+      <a href="products.html" class="offer-btn">Browse products</a>
+    </section>
+  </div>
+
+    <div class="container">
+      <div class="page-shell">
+        <section class="card" id="receiptCard">
+          <div class="receipt-hero">
+            <div class="eyebrow">Order receipt</div>
+            <h1>Your Kourani Market receipt</h1>
+            <p class="muted">
+              Keep this receipt for your records. Orders are prepared from our Farnworth warehouse for click &amp; collect or local delivery.
+            </p>
+            <div class="mini-badges">
+              <span class="mini-badge">Farnworth warehouse</span>
+              <span class="mini-badge">Click &amp; collect</span>
+              <span class="mini-badge">Local delivery</span>
+            </div>
+          </div>
+
+          <div id="receiptContent"></div>
+
+          <div id="loyaltyReceiptBox" class="loyalty-box" style="display:none;"></div>
+
+          <div class="actions">
+            <button class="btn btn-secondary" onclick="window.print()">🧾 Print receipt</button>
+            <a class="btn btn-primary" href="products.html">Continue shopping</a>
+            <a class="btn btn-soft" href="loyalty.html">⭐ View rewards</a>
+          </div>
+
+          <div class="print-note">
+            This receipt shows the order details saved on this device after checkout. If anything looks incorrect, contact Kourani Market as soon as possible.
+          </div>
+
+          <div class="receipt-meta" id="receiptMeta"></div>
+        </section>
+
+        <aside class="card delay sidebar-card">
+          <h2>Order summary</h2>
+          <div class="summary-list" id="summarySidebar">
+            <div class="summary-item">
+              <strong>Status</strong>
+              Receipt ready to view.
+            </div>
+          </div>
+
+          <div class="status-box">
+            <h2>What happens next</h2>
+            <p>
+              Our team checks availability, confirms any final adjustments if needed, and prepares your order for collection or delivery.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-small">Kourani Market Ltd – Food supply warehouse in Farnworth.</div>
+      <div>© <span id="year"></span> Kourani Market</div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const receiptContent = document.getElementById('receiptContent');
+    const receiptMeta = document.getElementById('receiptMeta');
+    const loyaltyBox = document.getElementById('loyaltyReceiptBox');
+    const summarySidebar = document.getElementById('summarySidebar');
+
+    const raw = localStorage.getItem('lastOrder') || sessionStorage.getItem('lastOrder');
+    const LOYALTY_KEY = 'kourani-loyalty-profiles';
+
+    function getProfiles() {
+      try {
+        const r = localStorage.getItem(LOYALTY_KEY);
+        if (!r) return {};
+        const p = JSON.parse(r);
+        return p && typeof p === 'object' ? p : {};
+      } catch (e) {
+        return {};
+      }
+    }
+
+    function money(n) {
+      return `£${Number(n || 0).toFixed(2)}`;
+    }
+
+    function safe(value, fallback = '-') {
+      return value ? String(value) : fallback;
+    }
+
+    if (!raw) {
+      receiptContent.innerHTML = "<div class='empty-state'>No order data found on this device. Please return to the order page or contact Kourani Market if you need help.</div>";
+      receiptMeta.innerHTML = "<div><strong>Need help?</strong> Please contact Kourani Market with your name and order details.</div>";
+      summarySidebar.innerHTML = `
+        <div class="summary-item">
+          <strong>Status</strong>
+          No local receipt data found.
+        </div>
+        <div class="summary-item">
+          <strong>Next step</strong>
+          Return to the order page if you need to place a new order.
+        </div>
+      `;
+    } else {
+      let order = {};
+      try {
+        order = JSON.parse(raw);
+      } catch (e) {
+        receiptContent.innerHTML = "<div class='empty-state'>Receipt data could not be read. Please contact Kourani Market.</div>";
+        order = null;
+      }
+
+      if (order) {
+        const cart = Array.isArray(order.cart) ? order.cart : [];
+        const total = Number(order.total) || 0;
+        const subtotal = Number(order.subtotal) || total;
+        const itemsCount = Number(order.itemsCount) || 0;
+        const discountPoints = Number(order.discountPoints || 0);
+        const discountVoucher = Number(order.discountVoucher || 0);
+        const earned = Number(order.pointsEarned || 0);
+        const usedPts = Number(order.pointsUsed || 0);
+        const d = order.delivery || {};
+        const c = order.customer || {};
+        const serviceLabel = d.type === 'delivery' ? 'Local delivery' : 'Click & collect';
+
+        if (!cart.length) {
+          receiptContent.innerHTML = "<div class='empty-state'>Your basket was empty.</div>";
+        } else {
+          let rows = '';
+          cart.forEach(item => {
+            const price = Number(item.price) || 0;
+            const qty = Number(item.qty) || 0;
+            const sub = price * qty;
+            rows += `
+              <tr>
+                <td>
+                  <strong>${safe(item.name, 'Product')}</strong><br>
+                  <small>${safe(item.family, '')}${item.subfamily ? ' / ' + item.subfamily : ''}</small>
+                </td>
+                <td>${qty}</td>
+                <td>${money(price)}</td>
+                <td>${money(sub)}</td>
+              </tr>
+            `;
+          });
+
+          let totalsHtml = `
+            <tr>
+              <td colspan="3" style="text-align:right; font-weight:700;">Subtotal:</td>
+              <td style="font-weight:700;">${money(subtotal)}</td>
+            </tr>
+          `;
+
+          if (discountPoints > 0) {
+            totalsHtml += `
+              <tr>
+                <td colspan="3" style="text-align:right; font-weight:700; color:#145c40;">Points discount:</td>
+                <td style="font-weight:700; color:#145c40;">-${money(discountPoints)}</td>
+              </tr>
+            `;
+          }
+
+          if (discountVoucher > 0) {
+            totalsHtml += `
+              <tr>
+                <td colspan="3" style="text-align:right; font-weight:700; color:#145c40;">Voucher discount:</td>
+                <td style="font-weight:700; color:#145c40;">-${money(discountVoucher)}</td>
+              </tr>
+            `;
+          }
+
+          receiptContent.innerHTML = `
+            <table>
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Qty</th>
+                  <th>Unit price</th>
+                  <th>Subtotal</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${rows}
+                ${totalsHtml}
+                <tr class="total-row">
+                  <td colspan="3">Total (${itemsCount} items)</td>
+                  <td>${money(total)}</td>
+                </tr>
+              </tbody>
+            </table>
+          `;
+        }
+
+        const email = (c.email || '').trim().toLowerCase();
+        const profiles = getProfiles();
+        const balance = Number(profiles[email]?.points || 0);
+        const balancePounds = (Math.floor(balance / 100) * 3).toFixed(2);
+
+        if (loyaltyBox) {
+          loyaltyBox.style.display = 'block';
+          loyaltyBox.innerHTML = `
+            <h2>⭐ Loyalty rewards</h2>
+            <div>Points earned on this order: <strong>${earned}</strong></div>
+            ${usedPts > 0 ? `<div>Points used: <strong>${usedPts}</strong> (-${money(discountPoints)})</div>` : ''}
+            <div>Current balance: <strong>${balance}</strong> pts (about £${balancePounds})</div>
+            <div><small>5 points per £1 spent • 100 points = £3 off</small></div>
+          `;
+        }
+
+        receiptMeta.innerHTML = `
+          <div><strong>Name:</strong> ${safe(c.name)}</div>
+          <div><strong>Phone:</strong> ${safe(c.phone)}</div>
+          ${c.email ? `<div><strong>Email:</strong> ${c.email}</div>` : ''}
+          <div style="margin-top:8px;"><strong>Service:</strong> ${serviceLabel}</div>
+          ${d.type === 'delivery' ? `
+            <div><strong>Address:</strong> ${safe(d.address)}</div>
+            <div><strong>Preferred day:</strong> ${safe(d.day)}</div>
+            <div><strong>Time slot:</strong> ${safe(d.slot)}</div>
+          ` : `
+            <div><strong>Collection:</strong> Farnworth warehouse</div>
+            <div><strong>Preferred day:</strong> ${safe(d.day)}</div>
+            <div><strong>Time slot:</strong> ${safe(d.slot)}</div>
+          `}
+          <div style="margin-top:8px;"><strong>Order date:</strong> ${order.createdAt ? new Date(order.createdAt).toLocaleString() : '-'}</div>
+        `;
+
+        summarySidebar.innerHTML = `
+          <div class="summary-item">
+            <strong>Customer</strong>
+            ${safe(c.name)}
+          </div>
+          <div class="summary-item">
+            <strong>Service</strong>
+            ${serviceLabel}
+          </div>
+          <div class="summary-item">
+            <strong>Total</strong>
+            ${money(total)}
+          </div>
+          <div class="summary-item">
+            <strong>Items</strong>
+            ${itemsCount}
+          </div>
+          <div class="summary-item">
+            <strong>Receipt stored</strong>
+            Saved on this device after checkout.
+          </div>
+        `;
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Kourani Market Ltd – Business Request Received</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="Your business supply request has been received by Kourani Market Ltd. We will review your enquiry and first stock request, then come back to you with the next step."
+  />
+
+  <style>
+    :root {
+      --primary: #145c40;
+      --primary-dark: #0f3f2c;
+      --primary-light: #1f8a5f;
+      --accent: #f4b41a;
+      --accent-soft: #fff7df;
+      --bg: #f6f8f7;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --card: #ffffff;
+      --border: #e5e7eb;
+      --success: #ecf7f1;
+      --shadow: 0 14px 34px rgba(15,23,42,0.08);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(244,180,26,0.12), transparent 24%),
+        radial-gradient(circle at left center, rgba(31,138,95,0.10), transparent 22%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    header {
+      background:
+        radial-gradient(circle at top right, rgba(255,255,255,0.12), transparent 28%),
+        linear-gradient(135deg, var(--primary-dark), var(--primary-light));
+      color: #fff;
+      padding: 18px 16px 28px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .logo-text {
+      font-weight: 800;
+      font-size: 1.18rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: #fff;
+    }
+
+    .logo-img {
+      height: 46px;
+      width: auto;
+      filter: drop-shadow(0 0 8px rgba(255,255,255,0.55));
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      font-size: 0.9rem;
+    }
+
+    .nav-links a {
+      color: #e8f6ee;
+      padding: 6px 10px;
+      border-radius: 999px;
+      transition: 0.16s ease-in-out;
+    }
+
+    .nav-links a:hover {
+      background: rgba(255,255,255,0.12);
+      transform: translateY(-1px);
+    }
+
+    main {
+      padding: 30px 0 48px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    @media (max-width: 920px) {
+      .layout { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background: rgba(255,255,255,0.96);
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,0.92);
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: rgba(20,92,64,0.06);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: var(--success);
+      color: var(--primary);
+      border: 1px solid #d6ede2;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-size: clamp(1.95rem, 2vw + 1rem, 2.7rem);
+      line-height: 1.12;
+      margin-bottom: 10px;
+      max-width: 13ch;
+      position: relative;
+      z-index: 1;
+    }
+
+    .lead {
+      color: #475569;
+      font-size: 1rem;
+      max-width: 60ch;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .mini-badges {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .mini-badge {
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      font-size: 0.82rem;
+      color: #334155;
+      font-weight: 600;
+    }
+
+    .info-banner {
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #fff7df, #fffdf6);
+      border: 1px solid #f0dda0;
+      color: #5b4708;
+      font-size: 0.93rem;
+      margin-top: 10px;
+    }
+
+    .info-banner strong {
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .section-title {
+      font-size: 1.08rem;
+      margin-bottom: 10px;
+      color: var(--primary);
+    }
+
+    .steps {
+      display: grid;
+      gap: 10px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 10px;
+      align-items: start;
+      padding: 10px 0;
+      border-top: 1px solid #eef2f7;
+    }
+
+    .step:first-child {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .step-no {
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: #7a5d10;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.95rem;
+    }
+
+    .step p {
+      color: #475569;
+      font-size: 0.93rem;
+    }
+
+    .summary-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .summary-item {
+      padding: 12px 13px;
+      border-radius: 16px;
+      background: #f8faf9;
+      border: 1px solid #edf1ef;
+      font-size: 0.92rem;
+      color: #475569;
+    }
+
+    .summary-item strong {
+      display: block;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 11px 16px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-size: 0.94rem;
+      font-weight: 800;
+      transition: 0.16s ease-in-out;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: #0f4b33;
+    }
+
+    .btn-soft {
+      background: #ecf7f1;
+      color: var(--primary);
+      border-color: #cfe6dc;
+    }
+
+    .btn-soft:hover {
+      background: #dff0e8;
+    }
+
+    .sidebar-box {
+      margin-top: 14px;
+      padding: 15px;
+      border-radius: 18px;
+      border: 1px solid #e8efe9;
+      background: #fffdf7;
+      font-size: 0.92rem;
+      color: #475569;
+    }
+
+    .sidebar-box strong {
+      display: block;
+      color: var(--primary);
+      margin-bottom: 5px;
+    }
+
+    footer {
+      background: #111827;
+      color: #d1d5db;
+      padding: 18px 0;
+      font-size: 0.82rem;
+      margin-top: 26px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .footer-small { color: #9ca3af; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav class="nav">
+        <a href="index.html" class="logo-text" aria-label="Back to home">
+          <img src="kourani-logo.png" alt="Kourani Market Logo" class="logo-img" />
+          Kourani Market Ltd
+        </a>
+
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="businesses.html">For Businesses</a>
+          <a href="catalogue.html">Catalogue</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="layout">
+        <section class="card hero-card">
+          <div class="eyebrow">Request received</div>
+          <h1>Thank you — your business request has been received</h1>
+          <p class="lead">
+            We have received your business details and your first stock request. We will now review what your business needs and come back to you with the right next step.
+          </p>
+
+          <div class="mini-badges">
+            <span class="mini-badge">Business enquiry received</span>
+            <span class="mini-badge">First stock request sent</span>
+            <span class="mini-badge">Personal review next</span>
+          </div>
+
+          <div class="info-banner">
+            <strong>What happens now?</strong>
+            This is still the setup stage. You are not expected to place repeat orders yet. First, we review your request. Then, if we move forward together, we prepare your personalised business ordering setup.
+          </div>
+
+          <div class="cta-row">
+            <a href="businesses.html" class="btn btn-soft">Back to business page</a>
+            <a href="index.html" class="btn btn-primary">Back to home</a>
+          </div>
+        </section>
+
+        <aside class="card">
+          <h2 class="section-title">Next steps</h2>
+          <div class="steps">
+            <div class="step">
+              <div class="step-no">1</div>
+              <p>We review your business details, area, and first stock request.</p>
+            </div>
+            <div class="step">
+              <div class="step-no">2</div>
+              <p>We check whether your request fits our current supply and delivery setup.</p>
+            </div>
+            <div class="step">
+              <div class="step-no">3</div>
+              <p>If suitable, we prepare your personalised next step and explain how your ordering process will work.</p>
+            </div>
+            <div class="step">
+              <div class="step-no">4</div>
+              <p>Approved business customers receive a direct order page link for future ordering.</p>
+            </div>
+          </div>
+
+          <div class="sidebar-box">
+            <strong>Important</strong>
+            Your first form helps us understand what your business needs. Your personalised order link is only sent after we review and approve the setup.
+          </div>
+        </aside>
+      </div>
+
+      <section class="card" style="margin-top:20px;">
+        <h2 class="section-title">What we use your request for</h2>
+        <div class="summary-list">
+          <div class="summary-item">
+            <strong>Your business details</strong>
+            We use them to understand who you are, where you are based, and how to contact you properly.
+          </div>
+          <div class="summary-item">
+            <strong>Your first stock request</strong>
+            We use it to understand the main products, pack sizes and quantities your business is likely to need.
+          </div>
+          <div class="summary-item">
+            <strong>Your service preference</strong>
+            We use it to review whether delivery, collection or a mixed setup makes the most sense for your business.
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-small">Kourani Market Ltd – Food supply warehouse in Farnworth.</div>
+      <div class="footer-small">Business setup flow for restaurants, takeaways & food businesses.</div>
+    </div>
+  </footer>
+</body>
+</html>

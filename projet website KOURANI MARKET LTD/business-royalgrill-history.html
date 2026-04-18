@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Kourani Market Ltd – Royal Grill Order History</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Royal Grill previous business orders and repeat order page for Kourani Market Ltd." />
+
+  <style>
+    :root {
+      --primary: #145c40;
+      --primary-dark: #0f3f2c;
+      --primary-light: #1f8a5f;
+      --accent: #f4b41a;
+      --bg: #f6f8f7;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --card: #ffffff;
+      --border: #e5e7eb;
+      --shadow: 0 14px 34px rgba(15,23,42,0.08);
+      --radius: 22px;
+      --danger: #b42318;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(244,180,26,0.12), transparent 24%),
+        radial-gradient(circle at left center, rgba(31,138,95,0.10), transparent 22%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    header {
+      background:
+        radial-gradient(circle at top right, rgba(255,255,255,0.10), transparent 26%),
+        linear-gradient(135deg, var(--primary-dark), var(--primary-light));
+      color: #fff;
+      padding: 18px 16px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 22px;
+    }
+
+    .logo-text {
+      font-weight: 800;
+      font-size: 1.15rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: #fff;
+    }
+
+    .logo-img {
+      height: 48px;
+      width: auto;
+      filter: drop-shadow(0 0 8px rgba(255,255,255,0.5));
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      font-size: 0.92rem;
+    }
+
+    .nav-links a {
+      color: #e7f6ef;
+      padding: 6px 10px;
+      border-radius: 999px;
+      transition: 0.16s ease-in-out;
+    }
+
+    .nav-links a:hover {
+      background: rgba(255,255,255,0.12);
+      transform: translateY(-1px);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.95fr);
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+    }
+
+    .hero-main,
+    .hero-side {
+      border-radius: var(--radius);
+      padding: 22px;
+    }
+
+    .hero-main {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.16);
+      backdrop-filter: blur(4px);
+    }
+
+    .hero-kicker {
+      display: inline-block;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #d9f5e7;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .hero-title {
+      font-size: clamp(2rem, 3vw, 2.9rem);
+      line-height: 1.08;
+      margin-bottom: 10px;
+      max-width: 13ch;
+    }
+
+    .hero-subtitle {
+      color: #eefaf4;
+      font-size: 1rem;
+      max-width: 58ch;
+      margin-bottom: 14px;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.24);
+      background: rgba(255,255,255,0.08);
+      color: #f8fffb;
+      font-size: 0.82rem;
+    }
+
+    .hero-side {
+      background: #fffdfa;
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.2);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.12);
+      animation: floatCard 4s ease-in-out infinite;
+    }
+
+    @keyframes floatCard {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+
+    .hero-side h3 {
+      color: var(--primary);
+      margin-bottom: 8px;
+      font-size: 1.05rem;
+    }
+
+    .hero-side p {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 10px;
+    }
+
+    .hero-list {
+      list-style: none;
+      display: grid;
+      gap: 6px;
+      font-size: 0.92rem;
+    }
+
+    .hero-list li::before {
+      content: "✓ ";
+      color: var(--primary);
+      font-weight: 800;
+    }
+
+    main {
+      padding: 28px 0 46px;
+    }
+
+    .offer-banner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding: 14px 16px;
+      border-radius: 18px;
+      border: 1px solid #f0dda0;
+      background: linear-gradient(135deg, #fff7df, #fffdf6);
+      box-shadow: 0 10px 24px rgba(244,180,26,0.12);
+      margin-bottom: 18px;
+      animation: pulseOffer 1.8s infinite;
+    }
+
+    @keyframes pulseOffer {
+      0%, 100% { transform: scale(1); box-shadow: 0 10px 24px rgba(244,180,26,0.10); }
+      50% { transform: scale(1.01); box-shadow: 0 14px 28px rgba(244,180,26,0.18); }
+    }
+
+    .offer-banner strong {
+      color: #5b4708;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .offer-banner span {
+      color: #6f5b17;
+      font-size: 0.92rem;
+    }
+
+    .offer-btn, .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 800;
+      transition: 0.16s ease-in-out;
+      cursor: pointer;
+      border: none;
+      white-space: nowrap;
+    }
+
+    .offer-btn:hover, .btn:hover {
+      background: #0f4b33;
+      transform: translateY(-1px);
+    }
+
+    .btn-soft {
+      background: #ecf7f1;
+      color: var(--primary);
+      border: 1px solid #cfe6dc;
+    }
+
+    .btn-soft:hover {
+      background: #dff0e8;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    @media (max-width: 960px) {
+      .layout { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background: rgba(255,255,255,0.96);
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.9);
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .card h2 {
+      font-size: 1.24rem;
+      margin-bottom: 8px;
+    }
+
+    .card-intro {
+      font-size: 0.92rem;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .history-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .history-item {
+      border: 1px solid #edf2ef;
+      border-radius: 18px;
+      padding: 14px;
+      background: #fcfdfc;
+    }
+
+    .history-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+
+    .history-title {
+      font-weight: 800;
+      font-size: 1rem;
+    }
+
+    .history-date {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .history-lines {
+      display: grid;
+      gap: 4px;
+      margin: 10px 0;
+      color: #45554e;
+      font-size: 0.92rem;
+    }
+
+    .history-total {
+      font-weight: 800;
+      color: var(--primary);
+      margin-top: 8px;
+    }
+
+    .history-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .small-muted {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .empty-box {
+      padding: 18px;
+      border-radius: 16px;
+      background: #f8fafc;
+      border: 1px dashed #d8e2ea;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .mini-info {
+      background: #f8fbf9;
+      border: 1px solid #dceee5;
+      border-radius: 16px;
+      padding: 14px;
+      font-size: 0.92rem;
+      color: #3f5c53;
+      margin-bottom: 12px;
+    }
+
+    .mini-info strong {
+      display: block;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .quick-points {
+      display: grid;
+      gap: 10px;
+    }
+
+    .quick-point {
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: #f8fbf9;
+      border: 1px solid #dceee5;
+      font-size: 0.92rem;
+      color: #40574f;
+    }
+
+    .quick-point strong {
+      display: block;
+      color: var(--primary);
+      margin-bottom: 3px;
+    }
+
+    footer {
+      background: #111827;
+      color: #d1d5db;
+      padding: 18px 0;
+      font-size: 0.82rem;
+      margin-top: 28px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .footer-small { color: #9ca3af; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <nav class="nav">
+      <a href="index.html" class="logo-text" aria-label="Back to home">
+        <img src="kourani-logo.png" alt="Kourani Market Logo" class="logo-img" />
+        Kourani Market Ltd
+      </a>
+
+      <div class="nav-links">
+        <a href="businesses.html">For Businesses</a>
+        <a href="business-royalgrill.html">Royal Grill Order Page</a>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-main">
+        <span class="hero-kicker">Royal Grill history</span>
+        <h1 class="hero-title">Previous orders and quick repeat ordering</h1>
+        <p class="hero-subtitle">
+          Review earlier Royal Grill orders, repeat the last one quickly, or load any saved order back into the Royal Grill order page.
+        </p>
+
+        <div class="hero-badges">
+          <span class="badge">Order history</span>
+          <span class="badge">Repeat last order</span>
+          <span class="badge">Faster reordering</span>
+          <span class="badge">Business clarity</span>
+        </div>
+      </div>
+
+      <aside class="hero-side">
+        <h3>How it works</h3>
+        <p>This page stores Royal Grill order history in the browser used on this device.</p>
+        <ul class="hero-list">
+          <li>See previous saved orders</li>
+          <li>Load the last order in one click</li>
+          <li>Reload any saved order when needed</li>
+          <li>Helpful for invoice and order checks</li>
+        </ul>
+      </aside>
+    </section>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <section class="offer-banner reveal" aria-label="Offer">
+      <div>
+        <strong>Quick repeat</strong>
+        <span>Use the button below to reload the most recent Royal Grill order into the main order page.</span>
+      </div>
+      <button type="button" class="offer-btn" id="repeatLastTopBtn">Repeat last order</button>
+    </section>
+
+    <div class="layout">
+      <section class="card reveal">
+        <h2>Previous Royal Grill orders</h2>
+        <p class="card-intro">
+          Saved orders appear here after they are recorded in the Royal Grill ordering flow.
+        </p>
+
+        <div id="historyList" class="history-list"></div>
+      </section>
+
+      <aside class="card reveal">
+        <h2>Useful actions</h2>
+
+        <div class="mini-info">
+          <strong>Important</strong>
+          This page works best when Royal Grill uses the same device and browser each time.
+        </div>
+
+        <div class="history-actions" style="margin-top:0; margin-bottom:14px;">
+          <button type="button" class="btn" id="repeatLastBtn">Repeat last order</button>
+          <a href="business-royalgrill.html" class="btn btn-soft">Go to order page</a>
+        </div>
+
+        <div class="quick-points">
+          <div class="quick-point">
+            <strong>Transparency</strong>
+            Customers can check previous orders without asking you to search manually.
+          </div>
+          <div class="quick-point">
+            <strong>Time saving</strong>
+            Reloading a past order is faster than rebuilding the same basket.
+          </div>
+          <div class="quick-point">
+            <strong>Next upgrade</strong>
+            Later, this can be connected to a central system like Google Sheets.
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <div>
+      <div>Kourani Market Ltd – Royal Grill previous orders.</div>
+      <div class="footer-small">Simple history page for repeat ordering and order clarity.</div>
+    </div>
+    <div class="footer-small">Farnworth warehouse • Business order support</div>
+  </div>
+</footer>
+
+<script>
+  const CART_KEY = 'kourani-business-cart-royal-grill';
+  const HISTORY_KEY = 'kourani-business-history-royal-grill';
+
+  function money(n){ return '£' + Number(n || 0).toFixed(2); }
+
+  function getHistory(){
+    const raw = localStorage.getItem(HISTORY_KEY);
+    if (!raw) return [];
+    try {
+      const parsed = JSON.parse(raw);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function saveCart(cart){
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+  }
+
+  function computeTotal(cart){
+    return (cart || []).reduce((sum, item) => sum + ((Number(item.price) || 0) * (Number(item.qty) || 0)), 0);
+  }
+
+  function renderHistory(){
+    const wrap = document.getElementById('historyList');
+    const history = getHistory();
+
+    if (!history.length) {
+      wrap.innerHTML = `
+        <div class="empty-box">
+          No previous orders saved yet on this device.<br>
+          <span class="small-muted">Orders will appear here once the Royal Grill flow stores them in local history.</span>
+        </div>
+      `;
+      return;
+    }
+
+    wrap.innerHTML = history.map((order, index) => {
+      const lines = (order.cart || []).map(item => {
+        const qty = Number(item.qty) || 0;
+        const price = Number(item.price) || 0;
+        return `<div>• ${item.name} × ${qty} <span class="small-muted">(${money(price)} each)</span></div>`;
+      }).join('');
+
+      const total = computeTotal(order.cart || []);
+
+      return `
+        <article class="history-item">
+          <div class="history-top">
+            <div>
+              <div class="history-title">Order ${history.length - index}</div>
+              <div class="history-date">${order.date || 'Date unavailable'}</div>
+            </div>
+          </div>
+
+          <div class="history-lines">${lines}</div>
+          <div class="history-total">Estimated total: ${money(total)}</div>
+
+          <div class="history-actions">
+            <button type="button" class="btn" onclick="loadOrder(${index})">Load this order</button>
+          </div>
+        </article>
+      `;
+    }).join('');
+  }
+
+  function loadOrder(index){
+    const history = getHistory();
+    if (!history[index]) return;
+    saveCart(history[index].cart || []);
+    alert('This order has been loaded into the Royal Grill order page.');
+    window.location.href = 'business-royalgrill.html';
+  }
+
+  function repeatLastOrder(){
+    const history = getHistory();
+    if (!history.length) {
+      alert('No previous Royal Grill orders saved yet.');
+      return;
+    }
+    saveCart(history[0].cart || []);
+    alert('The last order has been loaded into the Royal Grill order page.');
+    window.location.href = 'business-royalgrill.html';
+  }
+
+  document.getElementById('repeatLastBtn').addEventListener('click', repeatLastOrder);
+  document.getElementById('repeatLastTopBtn').addEventListener('click', repeatLastOrder);
+
+  (function revealOnScroll(){
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.querySelectorAll('.reveal').forEach(el => el.classList.add('is-visible'));
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  })();
+
+  renderHistory();
+</script>
+</body>
+</html>

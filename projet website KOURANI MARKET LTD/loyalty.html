@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Kourani Market Ltd – Loyalty & Rewards</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Join the Kourani Market loyalty programme for local customers in Farnworth, Bolton and nearby areas. Earn points on eligible orders and enjoy simple local rewards." />
+
+  <style>
+    :root {
+      --primary: #145c40;
+      --primary-light: #1f8a5f;
+      --accent: #f4b41a;
+      --accent-soft: #fff5d6;
+      --bg: #f6f8f7;
+      --bg-soft: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --card: #ffffff;
+      --border: #e5e7eb;
+      --shadow: 0 14px 30px rgba(15, 23, 42, 0.08);
+      --radius: 20px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(180deg, #f6f8f7 0%, #eef5f1 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    header {
+      background: linear-gradient(135deg, #0f3f2c, #1f8a5f 58%, #2ba36f);
+      color: #fff;
+      padding: 18px 0 26px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before,
+    header::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      filter: blur(6px);
+    }
+
+    header::before {
+      width: 240px;
+      height: 240px;
+      right: -80px;
+      top: -80px;
+    }
+
+    header::after {
+      width: 140px;
+      height: 140px;
+      left: -30px;
+      bottom: -50px;
+    }
+
+    .nav {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .logo-text {
+      font-weight: 800;
+      font-size: 1.18rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: #fff;
+    }
+
+    .logo-img {
+      height: 46px;
+      width: auto;
+      filter: drop-shadow(0 0 8px rgba(255,255,255,0.45));
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      font-size: 0.92rem;
+    }
+
+    .nav-links a {
+      color: #e8f7ef;
+      padding: 7px 12px;
+      border-radius: 999px;
+      transition: background 0.18s ease, transform 0.18s ease;
+    }
+
+    .nav-links a:hover {
+      background: rgba(255,255,255,0.12);
+      transform: translateY(-1px);
+    }
+
+    .basket-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .basket-count-pill {
+      min-width: 20px;
+      height: 20px;
+      padding: 0 6px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #111;
+      font-size: 0.75rem;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    main {
+      padding: 30px 0 54px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.95fr);
+      gap: 22px;
+      align-items: stretch;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; }
+    }
+
+    .hero-panel,
+    .hero-card,
+    .section-card,
+    .form-card,
+    .faq-card {
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.7);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-panel {
+      padding: 26px;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at top right, rgba(244,180,26,0.18), transparent 34%),
+        linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.88));
+    }
+
+    .hero-kicker,
+    .section-kicker {
+      display: inline-block;
+      font-size: 0.77rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-weight: 800;
+      color: var(--primary-light);
+      margin-bottom: 10px;
+    }
+
+    .hero-title {
+      font-size: clamp(2rem, 3vw + 1rem, 3rem);
+      line-height: 1.08;
+      margin-bottom: 12px;
+      max-width: 12ch;
+    }
+
+    .hero-subtitle {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 62ch;
+      margin-bottom: 18px;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .badge {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #eff8f3;
+      border: 1px solid #d7ecdf;
+      color: var(--primary);
+      font-size: 0.86rem;
+      font-weight: 700;
+    }
+
+    .hero-copy-box {
+      background: linear-gradient(180deg, #f7fbf8, #eef7f1);
+      border: 1px solid #dbe9e0;
+      border-radius: 16px;
+      padding: 14px 16px;
+      font-size: 0.95rem;
+      color: #35524a;
+    }
+
+    .hero-card {
+      padding: 22px;
+      display: grid;
+      gap: 14px;
+      align-content: start;
+      background: linear-gradient(180deg, #ffffff, #f8fbf9);
+    }
+
+    .hero-card h2 {
+      font-size: 1.2rem;
+      color: var(--primary);
+    }
+
+    .steps {
+      display: grid;
+      gap: 10px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 10px;
+      align-items: start;
+      padding: 12px;
+      border-radius: 14px;
+      border: 1px solid #e8eeeb;
+      background: #fff;
+    }
+
+    .step-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #111;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .step strong {
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .step p {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+      margin-top: 24px;
+    }
+
+    @media (max-width: 860px) {
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+
+    .section-card,
+    .form-card,
+    .faq-card {
+      padding: 22px;
+    }
+
+    .section-title {
+      font-size: 1.45rem;
+      margin-bottom: 8px;
+    }
+
+    .section-text {
+      color: var(--muted);
+      font-size: 0.96rem;
+      margin-bottom: 16px;
+    }
+
+    .reward-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+    }
+
+    .reward {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px;
+      background: linear-gradient(180deg, #fff, #fbfcfb);
+      transition: transform 0.16s ease, box-shadow 0.16s ease;
+    }
+
+    .reward:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 22px rgba(15, 23, 42, 0.07);
+    }
+
+    .reward strong {
+      display: block;
+      color: var(--primary);
+      margin-bottom: 4px;
+      font-size: 1rem;
+    }
+
+    .reward p {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .info-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .info-item {
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: #f8fbf9;
+      border: 1px solid #e2ece6;
+      font-size: 0.94rem;
+    }
+
+    .info-item strong {
+      color: var(--primary);
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    @media (max-width: 640px) {
+      .form-grid { grid-template-columns: 1fr; }
+    }
+
+    .form-group {
+      margin-bottom: 12px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.92rem;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      border: 1px solid #d1d5db;
+      border-radius: 12px;
+      padding: 12px 13px;
+      font: inherit;
+      background: #fff;
+      color: var(--text);
+      transition: border-color 0.16s ease, box-shadow 0.16s ease, transform 0.16s ease;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #8dc7ad;
+      box-shadow: 0 0 0 4px rgba(31, 138, 95, 0.12);
+      transform: translateY(-1px);
+    }
+
+    .form-group small {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      padding: 11px 18px;
+      font-size: 0.95rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 10px 20px rgba(20,92,64,0.16);
+    }
+
+    .btn-primary:hover { background: #0f4932; }
+
+    .btn-soft {
+      background: #eff8f3;
+      color: var(--primary);
+      border-color: #d5e8dd;
+    }
+
+    .btn-soft:hover { background: #e1f1e8; }
+
+    .status-box {
+      display: none;
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      font-size: 0.94rem;
+      border: 1px solid #dbe9e0;
+      background: #f4fbf7;
+      color: #27463d;
+    }
+
+    .status-box.is-error {
+      border-color: #f0d5d5;
+      background: #fff6f6;
+      color: #8b2c2c;
+    }
+
+    .faq-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .faq-item {
+      padding: 14px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: #fff;
+    }
+
+    .faq-item strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--primary);
+    }
+
+    .faq-item p {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    footer {
+      background: #101312;
+      color: #d6ddd9;
+      padding: 20px 0;
+      margin-top: 28px;
+      font-size: 0.84rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .footer-small {
+      color: #aab6b0;
+    }
+
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.45s ease, transform 0.45s ease;
+    }
+
+    [data-reveal].is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  
+    .offer-banner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding: 14px 16px;
+      border-radius: 18px;
+      border: 1px solid #f0dda0;
+      background: linear-gradient(135deg, #fff7df, #fffdf6);
+      box-shadow: 0 10px 24px rgba(244,180,26,0.12);
+      margin-bottom: 18px;
+      animation: pulseOffer 1.8s infinite;
+    }
+
+    @keyframes pulseOffer {
+      0%, 100% { transform: scale(1); box-shadow: 0 10px 24px rgba(244,180,26,0.10); }
+      50% { transform: scale(1.01); box-shadow: 0 14px 28px rgba(244,180,26,0.18); }
+    }
+
+    .offer-banner strong {
+      color: #5b4708;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .offer-banner span {
+      color: #6f5b17;
+      font-size: 0.92rem;
+    }
+
+    .offer-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 800;
+      transition: 0.16s ease-in-out;
+    }
+
+    .offer-btn:hover {
+      background: #0f4b33;
+      transform: translateY(-1px);
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav class="nav">
+        <a href="index.html" class="logo-text" aria-label="Back to home">
+          <img src="kourani-logo.png" alt="Kourani Market Logo" class="logo-img" />
+          <span>Kourani Market Ltd</span>
+        </a>
+
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="products.html">Products</a>
+          <a href="catalogue.html">Catalogue</a>
+          <a href="order.html">Order</a>
+          <a href="loyalty.html">Loyalty</a>
+          <a href="order.html" class="basket-link">
+            <span>Basket</span>
+            <span class="basket-count-pill" data-basket-count>0</span>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <section class="offer-banner" aria-label="Offer">
+        <div>
+          <strong>Loyalty offer</strong>
+          <span>Join now and build points on eligible home orders. 100 points can be turned into a discount on future shopping.</span>
+        </div>
+        <a href="products.html" class="offer-btn">Start shopping</a>
+      </section>
+    </div>
+
+    <div class="container">
+      <section class="hero">
+        <div class="hero-panel" data-reveal>
+          <span class="hero-kicker">Local rewards</span>
+          <h1 class="hero-title">Simple loyalty for local customers</h1>
+          <p class="hero-subtitle">
+            Join the Kourani Market loyalty programme and earn points on eligible orders for click &amp; collect or local delivery from our Farnworth warehouse.
+          </p>
+
+          <div class="hero-badges">
+            <span class="badge">Free to join</span>
+            <span class="badge">Local rewards</span>
+            <span class="badge">Easy to use</span>
+            <span class="badge">Made for launch</span>
+          </div>
+
+          <div class="hero-copy-box">
+            This is designed for regular local customers who order groceries, frozen food and essentials with us. It keeps things simple, practical and easy to follow.
+          </div>
+        </div>
+
+        <aside class="hero-card" data-reveal>
+          <h2>How it works</h2>
+          <div class="steps">
+            <div class="step">
+              <div class="step-icon">1</div>
+              <div>
+                <strong>Join with your details</strong>
+                <p>Create your loyalty profile in under a minute.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-icon">2</div>
+              <div>
+                <strong>Order as usual</strong>
+                <p>Use the same name and phone number when ordering.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-icon">3</div>
+              <div>
+                <strong>Earn points</strong>
+                <p>Eligible orders add points automatically to your profile.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-icon">4</div>
+              <div>
+                <strong>Use rewards later</strong>
+                <p>Redeem points on future orders when available.</p>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <div class="grid-2">
+        <section class="section-card" data-reveal>
+          <span class="section-kicker">Rewards</span>
+          <h2 class="section-title">Built for regular shoppers</h2>
+          <p class="section-text">
+            We want to reward repeat local customers in a way that feels fair, useful and easy to understand.
+          </p>
+
+          <div class="reward-grid">
+            <article class="reward">
+              <strong>Earn points</strong>
+              <p>Collect points on eligible completed orders placed with your loyalty details.</p>
+            </article>
+            <article class="reward">
+              <strong>Simple rewards</strong>
+              <p>Use points for small discounts and special offers as the programme grows.</p>
+            </article>
+            <article class="reward">
+              <strong>Launch-friendly</strong>
+              <p>A practical system that works well for a growing local business.</p>
+            </article>
+            <article class="reward">
+              <strong>Local first</strong>
+              <p>Designed around repeat customers in Farnworth, Bolton and nearby areas.</p>
+            </article>
+          </div>
+
+          <div class="info-list">
+            <div class="info-item">
+              <strong>Good to know</strong>
+              Loyalty rewards apply to participating customer orders and may be updated as the business grows.
+            </div>
+            <div class="info-item">
+              <strong>Business accounts</strong>
+              Restaurant and trade customers should still contact us directly for pricing, sourcing and account support.
+            </div>
+          </div>
+        </section>
+
+        <section class="form-card" data-reveal>
+          <span class="section-kicker">Join now</span>
+          <h2 class="section-title">Create your loyalty profile</h2>
+          <p class="section-text">
+            Enter your details below to join. We save your loyalty profile locally in this browser for your current setup.
+          </p>
+
+          <form id="loyaltyForm">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="fullName">Full name</label>
+                <input id="fullName" name="fullName" type="text" placeholder="Your full name" required />
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone number</label>
+                <input id="phone" name="phone" type="tel" placeholder="e.g. 07..." required />
+              </div>
+            </div>
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="email">Email address</label>
+                <input id="email" name="email" type="email" placeholder="your@email.com" />
+                <small>Optional, but useful for future updates.</small>
+              </div>
+              <div class="form-group">
+                <label for="area">Area</label>
+                <select id="area" name="area">
+                  <option value="">Select your area</option>
+                  <option>Farnworth</option>
+                  <option>Bolton</option>
+                  <option>Little Hulton</option>
+                  <option>Kearsley</option>
+                  <option>Walkden</option>
+                  <option>Other nearby area</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="notes">Notes</label>
+              <textarea id="notes" name="notes" rows="4" placeholder="Anything useful for your profile, favourite products, or delivery notes"></textarea>
+            </div>
+
+            <div class="btn-row">
+              <button class="btn btn-primary" type="submit">Join loyalty</button>
+              <button class="btn btn-soft" type="button" id="viewProfileBtn">View saved profile</button>
+            </div>
+          </form>
+
+          <div class="status-box" id="statusBox"></div>
+        </section>
+      </div>
+
+      <section class="faq-card" data-reveal style="margin-top: 22px;">
+        <span class="section-kicker">Questions</span>
+        <h2 class="section-title">Helpful information</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <strong>Do I need a loyalty card?</strong>
+            <p>No. We match your profile using the same customer details you use when ordering.</p>
+          </div>
+          <div class="faq-item">
+            <strong>Can I use this for business orders?</strong>
+            <p>The loyalty page is mainly for household customers. Business customers should contact us directly for account support and tailored supply.</p>
+          </div>
+          <div class="faq-item">
+            <strong>Will the rewards stay the same?</strong>
+            <p>We may refine the programme as the business grows, but we will keep it simple and fair.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>Kourani Market Ltd</div>
+      <div class="footer-small">Warehouse-based food supply in Farnworth • Local delivery &amp; click &amp; collect</div>
+    </div>
+  </footer>
+
+  <script src="cart.js"></script>
+  <script>
+    const LOYALTY_KEY = 'kourani-loyalty-profiles';
+
+    function getProfiles() {
+      try {
+        const raw = localStorage.getItem(LOYALTY_KEY);
+        const parsed = raw ? JSON.parse(raw) : [];
+        return Array.isArray(parsed) ? parsed : [];
+      } catch (err) {
+        console.warn('Could not read loyalty profiles', err);
+        return [];
+      }
+    }
+
+    function saveProfiles(profiles) {
+      localStorage.setItem(LOYALTY_KEY, JSON.stringify(profiles));
+    }
+
+    function normalisePhone(value) {
+      return String(value || '').replace(/\s+/g, '').trim();
+    }
+
+    function showStatus(message, isError = false) {
+      const box = document.getElementById('statusBox');
+      box.style.display = 'block';
+      box.textContent = message;
+      box.classList.toggle('is-error', isError);
+    }
+
+    document.getElementById('loyaltyForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const fullName = document.getElementById('fullName').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const area = document.getElementById('area').value.trim();
+      const notes = document.getElementById('notes').value.trim();
+
+      if (!fullName || !phone) {
+        showStatus('Please enter your full name and phone number.', true);
+        return;
+      }
+
+      const profiles = getProfiles();
+      const phoneKey = normalisePhone(phone);
+      const existingIndex = profiles.findIndex((p) => normalisePhone(p.phone) === phoneKey);
+
+      const profile = {
+        name: fullName,
+        phone,
+        email,
+        area,
+        notes,
+        points: existingIndex >= 0 ? Number(profiles[existingIndex].points || 0) : 0,
+        joinedAt: existingIndex >= 0 ? profiles[existingIndex].joinedAt : new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      };
+
+      if (existingIndex >= 0) {
+        profiles[existingIndex] = profile;
+        showStatus(`Your loyalty profile has been updated. Current points: ${profile.points}.`);
+      } else {
+        profiles.push(profile);
+        showStatus('You have joined the Kourani Market loyalty programme. You can now order using the same name and phone number.');
+      }
+
+      saveProfiles(profiles);
+      localStorage.setItem('kourani-last-loyalty-phone', phone);
+      e.target.reset();
+    });
+
+    document.getElementById('viewProfileBtn').addEventListener('click', () => {
+      const lastPhone = localStorage.getItem('kourani-last-loyalty-phone');
+      const profiles = getProfiles();
+      const found = lastPhone
+        ? profiles.find((p) => normalisePhone(p.phone) === normalisePhone(lastPhone))
+        : profiles[profiles.length - 1];
+
+      if (!found) {
+        showStatus('No saved loyalty profile found on this device yet.', true);
+        return;
+      }
+
+      showStatus(`Saved profile: ${found.name} • ${found.phone}${found.area ? ` • ${found.area}` : ''} • Points: ${Number(found.points || 0)}.`);
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.classList.add('is-visible');
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('[data-reveal]').forEach((el) => observer.observe(el));
+  </script>
+</body>
+</html>

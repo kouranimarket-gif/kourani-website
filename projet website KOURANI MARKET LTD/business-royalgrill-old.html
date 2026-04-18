@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Kourani Market Ltd – Royal Grill Business Order Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Dedicated business client order page for Royal Grill to place repeat stock requests, top-up orders and sourcing requests with Kourani Market Ltd." />
+
+  <style>
+    :root {
+      --primary: #145c40;
+      --primary-dark: #0f3f2c;
+      --primary-light: #1f8a5f;
+      --accent: #f4b41a;
+      --bg: #f6f8f7;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --card: #ffffff;
+      --border: #e5e7eb;
+      --shadow: 0 14px 34px rgba(15,23,42,0.08);
+      --radius: 22px;
+      --danger: #b42318;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(244,180,26,0.12), transparent 24%),
+        radial-gradient(circle at left center, rgba(31,138,95,0.10), transparent 22%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    header {
+      background:
+        radial-gradient(circle at top right, rgba(255,255,255,0.10), transparent 26%),
+        linear-gradient(135deg, var(--primary-dark), var(--primary-light));
+      color: #fff;
+      padding: 18px 16px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 22px;
+    }
+
+    .logo-text {
+      font-weight: 800;
+      font-size: 1.15rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: #fff;
+    }
+
+    .logo-img {
+      height: 48px;
+      width: auto;
+      filter: drop-shadow(0 0 8px rgba(255,255,255,0.5));
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      font-size: 0.92rem;
+    }
+
+    .nav-links a {
+      color: #e7f6ef;
+      padding: 6px 10px;
+      border-radius: 999px;
+      transition: 0.16s ease-in-out;
+    }
+
+    .nav-links a:hover {
+      background: rgba(255,255,255,0.12);
+      transform: translateY(-1px);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.95fr);
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+    }
+
+    .hero-main,
+    .hero-side {
+      border-radius: var(--radius);
+      padding: 22px;
+    }
+
+    .hero-main {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.16);
+      backdrop-filter: blur(4px);
+    }
+
+    .hero-kicker {
+      display: inline-block;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #d9f5e7;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .hero-title {
+      font-size: clamp(2rem, 3vw, 2.9rem);
+      line-height: 1.08;
+      margin-bottom: 10px;
+      max-width: 12ch;
+    }
+
+    .hero-subtitle {
+      color: #eefaf4;
+      font-size: 1rem;
+      max-width: 58ch;
+      margin-bottom: 14px;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.24);
+      background: rgba(255,255,255,0.08);
+      color: #f8fffb;
+      font-size: 0.82rem;
+    }
+
+    .hero-note {
+      color: #dcefe6;
+      font-size: 0.92rem;
+    }
+
+    .hero-side {
+      background: #fffdfa;
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.2);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.12);
+      animation: floatCard 4s ease-in-out infinite;
+    }
+
+    @keyframes floatCard {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+
+    .hero-side h3 {
+      color: var(--primary);
+      margin-bottom: 8px;
+      font-size: 1.05rem;
+    }
+
+    .hero-side p {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 10px;
+    }
+
+    .hero-list {
+      list-style: none;
+      display: grid;
+      gap: 6px;
+      font-size: 0.92rem;
+    }
+
+    .hero-list li::before {
+      content: "✓ ";
+      color: var(--primary);
+      font-weight: 800;
+    }
+
+    main {
+      padding: 28px 0 46px;
+    }
+
+    .offer-banner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding: 14px 16px;
+      border-radius: 18px;
+      border: 1px solid #f0dda0;
+      background: linear-gradient(135deg, #fff7df, #fffdf6);
+      box-shadow: 0 10px 24px rgba(244,180,26,0.12);
+      margin-bottom: 18px;
+      animation: pulseOffer 1.8s infinite;
+    }
+
+    @keyframes pulseOffer {
+      0%, 100% { transform: scale(1); box-shadow: 0 10px 24px rgba(244,180,26,0.10); }
+      50% { transform: scale(1.01); box-shadow: 0 14px 28px rgba(244,180,26,0.18); }
+    }
+
+    .offer-banner strong {
+      color: #5b4708;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .offer-banner span {
+      color: #6f5b17;
+      font-size: 0.92rem;
+    }
+
+    .offer-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 800;
+      transition: 0.16s ease-in-out;
+      cursor: pointer;
+      border: none;
+    }
+
+    .offer-btn:hover {
+      background: #0f4b33;
+      transform: translateY(-1px);
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    @media (max-width: 900px) {
+      .meta-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    }
+
+    @media (max-width: 640px) {
+      .meta-grid { grid-template-columns: 1fr; }
+    }
+
+    .meta-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 14px;
+      box-shadow: var(--shadow);
+    }
+
+    .meta-card strong {
+      display: block;
+      color: var(--primary);
+      margin-bottom: 4px;
+      font-size: 0.92rem;
+    }
+
+    .meta-card span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.18fr) minmax(320px, 0.92fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    @media (max-width: 980px) {
+      .layout { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background: rgba(255,255,255,0.96);
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.9);
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .card h2 {
+      font-size: 1.24rem;
+      margin-bottom: 8px;
+    }
+
+    .card-intro {
+      font-size: 0.92rem;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .family-nav {
+      margin: 0 0 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 0.88rem;
+    }
+
+    .family-nav a {
+      padding: 8px 11px;
+      border-radius: 999px;
+      background: #e2f3ec;
+      color: var(--primary);
+      font-weight: 600;
+      transition: 0.15s ease-in-out;
+    }
+
+    .family-nav a:hover {
+      background: #cce8dd;
+      transform: translateY(-1px);
+    }
+
+    .family-block {
+      padding: 18px 0 10px;
+      border-top: 1px solid var(--border);
+      scroll-margin-top: 90px;
+    }
+
+    .family-title {
+      font-size: 1.18rem;
+      margin-bottom: 4px;
+    }
+
+    .family-subtitle {
+      font-size: 0.92rem;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .product-list {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .product-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      border: 1px solid #edf2ef;
+      border-radius: 16px;
+      padding: 12px;
+      background: #fcfdfc;
+    }
+
+    .product-main {
+      flex: 1;
+      min-width: 220px;
+    }
+
+    .product-main strong {
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .product-meta {
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    .product-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .add-to-basket-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 9px 13px;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      border: 1px solid transparent;
+      cursor: pointer;
+      white-space: nowrap;
+      background: var(--primary);
+      color: #fff;
+      transition: 0.15s ease-in-out;
+    }
+
+    .add-to-basket-btn:hover {
+      background: #0f4b33;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+    }
+
+    .cart-empty {
+      font-size: 0.95rem;
+      color: var(--muted);
+      padding: 12px 0 4px;
+    }
+
+    .cart-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+      margin-top: 10px;
+    }
+
+    .cart-table th,
+    .cart-table td {
+      padding: 10px 6px;
+      text-align: left;
+      border-bottom: 1px solid #edf2f7;
+      vertical-align: top;
+    }
+
+    .cart-table th {
+      font-size: 0.77rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #64748b;
+    }
+
+    .product-cell strong { display: block; }
+    .product-cell small { color: var(--muted); }
+
+    .qty-controls {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 999px;
+      padding: 3px;
+    }
+
+    .qty-btn {
+      border-radius: 999px;
+      border: none;
+      width: 28px;
+      height: 28px;
+      background: #fff;
+      cursor: pointer;
+      font-size: 0.95rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+
+    .qty-number {
+      min-width: 22px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 0.88rem;
+    }
+
+    .remove-link {
+      color: var(--danger);
+      font-size: 0.82rem;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    .summary-box {
+      margin-top: 14px;
+      border-radius: 14px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      padding: 14px;
+    }
+
+    .summary-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 0.92rem;
+      margin-bottom: 6px;
+    }
+
+    .summary-line:last-child { margin-bottom: 0; }
+
+    .summary-line.total {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid #dbe3ec;
+      font-size: 1rem;
+      font-weight: 800;
+    }
+
+    .cart-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .btn-soft {
+      background: #ecf7f1;
+      color: var(--primary);
+      border: 1px solid #cfe6dc;
+    }
+
+    .btn-soft:hover { background: #dff0e8; }
+
+    .form-group { margin-bottom: 12px; }
+
+    .form-group label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 5px;
+      font-size: 0.92rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid #d1d5db;
+      font-family: inherit;
+      font-size: 0.93rem;
+      background: #fff;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary-light);
+      box-shadow: 0 0 0 3px rgba(31,138,95,0.12);
+    }
+
+    .form-group small {
+      display: block;
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .info-strip {
+      margin-bottom: 14px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: #eff6ff;
+      border: 1px solid #dbeafe;
+      color: #1e3a8a;
+      font-size: 0.9rem;
+    }
+
+    .delivery-extra[hidden] { display: none !important; }
+
+    .mini-cta {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: #ecf7f1;
+      border: 1px solid #d7ece1;
+      font-size: 0.9rem;
+    }
+
+    .mini-cta strong { color: var(--primary); }
+
+    .small-muted {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    footer {
+      background: #111827;
+      color: #d1d5db;
+      padding: 18px 0;
+      font-size: 0.82rem;
+      margin-top: 28px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .footer-small { color: #9ca3af; }
+
+    .add-toast {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      padding: 12px 16px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #111;
+      font-size: 0.9rem;
+      font-weight: 600;
+      box-shadow: 0 10px 25px rgba(244, 180, 26, 0.45);
+      opacity: 0;
+      transform: translateY(8px);
+      pointer-events: none;
+      transition: opacity 0.18s ease-out, transform 0.18s ease-out;
+      z-index: 1100;
+    }
+
+    .add-toast.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <nav class="nav">
+      <a href="index.html" class="logo-text" aria-label="Back to home">
+        <img src="kourani-logo.png" alt="Kourani Market Logo" class="logo-img" />
+        Kourani Market Ltd
+      </a>
+
+      <div class="nav-links">
+        <a href="businesses.html">For Businesses</a>
+        <a href="catalogue.html">Catalogue</a>
+        <a href="order.html">Customer Orders</a>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-main">
+        <span class="hero-kicker">Existing business customer</span>
+        <h1 class="hero-title">Royal Grill order page</h1>
+        <p class="hero-subtitle">
+          Use this page for repeat stock requests, top-up orders and sourcing notes for Royal Grill.
+        </p>
+
+        <div class="hero-badges">
+          <span class="badge">Repeat orders</span>
+          <span class="badge">Weekly stock</span>
+          <span class="badge">Flexible sourcing</span>
+          <span class="badge">Business use</span>
+        </div>
+
+        <p class="hero-note">
+          This page can be used by the Royal Grill team for regular ordering and extra stock requests.
+        </p>
+      </div>
+
+      <aside class="hero-side">
+        <h3>How this page helps</h3>
+        <p>A faster repeat-order system for an existing business client.</p>
+        <ul class="hero-list">
+          <li>Regular items already listed</li>
+          <li>Quick top-up ordering</li>
+          <li>Easy sourcing requests in notes</li>
+          <li>Clear record of what was requested</li>
+        </ul>
+      </aside>
+    </section>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <section class="offer-banner reveal" aria-label="Offer">
+      <div>
+        <strong>Weekly stock reminder</strong>
+        <span>If you need extra stock or new items this week, add them in the notes and we will review them with your order.</span>
+      </div>
+      <button type="button" class="offer-btn" onclick="document.getElementById('orderForm').scrollIntoView({behavior:'smooth'})">Place order</button>
+    </section>
+
+    <section class="meta-grid reveal">
+      <article class="meta-card">
+        <strong>Client</strong>
+        <span>Royal Grill</span>
+      </article>
+      <article class="meta-card">
+        <strong>Area</strong>
+        <span>Bolton</span>
+      </article>
+      <article class="meta-card">
+        <strong>Usual day</strong>
+        <span>Friday</span>
+      </article>
+      <article class="meta-card">
+        <strong>Account ref</strong>
+        <span>RG-001</span>
+      </article>
+    </section>
+
+    <div class="layout">
+      <section class="card reveal" aria-label="Royal Grill product list">
+        <h2>Royal Grill regular stock</h2>
+        <p class="card-intro">
+          A starting example of regular order lines. Replace or expand these products based on what Royal Grill actually buys.
+        </p>
+
+        <nav class="family-nav" aria-label="Royal Grill product families">
+          <a href="#frozen">Frozen</a>
+          <a href="#groceries">Groceries</a>
+          <a href="#oils">Oils & staples</a>
+          <a href="#extras">Extras</a>
+        </nav>
+
+        <section id="frozen" class="family-block">
+          <h3 class="family-title">Frozen food</h3>
+          <p class="family-subtitle">Regular frozen lines often used in Royal Grill kitchen operations.</p>
+          <ul class="product-list">
+            <li class="product-row">
+              <div class="product-main">
+                <strong>Chicken Wings – 10kg box</strong>
+                <div class="product-meta">Regular stock line • Example price</div>
+              </div>
+              <div class="product-actions">
+                <button class="add-to-basket-btn" data-id="rg-wings-10kg" data-name="Chicken Wings – 10kg box" data-family="Frozen Food" data-subfamily="Royal Grill Regular Stock" data-price="34.99">Add £34.99</button>
+              </div>
+            </li>
+            <li class="product-row">
+              <div class="product-main">
+                <strong>Chicken Fillet – 5kg</strong>
+                <div class="product-meta">Regular stock line • Example price</div>
+              </div>
+              <div class="product-actions">
+                <button class="add-to-basket-btn" data-id="rg-fillet-5kg" data-name="Chicken Fillet – 5kg" data-family="Frozen Food" data-subfamily="Royal Grill Regular Stock" data-price="27.99">Add £27.99</button>
+              </div>
+            </li>
+            <li class="product-row">
+              <div class="product-main">
+                <strong>Fish Fillets – 5kg</strong>
+                <div class="product-meta">Regular stock line • Example price</div>
+              </div>
+              <div class="product-actions">
+                <button class="add-to-basket-btn" data-id="rg-fish-5kg" data-name="Fish Fillets – 5kg" data-family="Frozen Food" data-subfamily="Royal Grill Regular Stock" data-price="26.50">Add £26.50</button>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <section id="groceries" class="family-block">
+          <h3 class="family-title">Groceries</h3>
+          <p class="family-subtitle">Dry goods and regular pantry lines for service prep.</p>
+          <ul class="product-list">
+            <li class="product-row">
+              <div class="product-main">
+                <strong>Long Grain Rice – 20kg</strong>
+                <div class="product-meta">Regular stock line • Example price</div>
+              </div>
+              <div class="product-actions">
+                <button class="add-to-basket-btn" data-id="rg-rice-20kg" data-name="Long Grain Rice – 20kg" data-family="Groceries" data-subfamily="Royal Grill Regular Stock" data-price="21.99">Add £21.99</button>
+              </div>
+            </li>
+            <li class="product-row">
+              <div class="product-main">
+                <strong>Flour – 16kg</strong>
+                <div class="product-meta">Regular stock line • Example price</div>
+              </div>
+              <div class="product-actions">
+                <button class="add-to-basket-btn" data-id="rg-flour-16kg" data-name="Flour – 16kg" data-family="Groceries" data-subfamily="Royal Grill Regular Stock" data-price="12.49">Add £12.49</button>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <section id="oils" class="family-block">
+          <h3 class="family-title">Oils & staples</h3>
+          <p class="family-subtitle">Kitchen essentials and important repeat stock items.</p>
+          <ul class="product-list">
+            <li class="product-row">
+              <div class="product-main">
+                <strong>Cooking Oil – 20L</strong>
+                <div class="product-meta">Regular stock line • Example price</div>
+              </div>
+              <div class="product-actions">
+                <button class="add-to-basket-btn" data-id="rg-oil-20l" data-name="Cooking Oil – 20L" data-family="Oils & Staples" data-subfamily="Royal Grill Regular Stock" data-price="29.99">Add £29.99</button>
+              </div>
+            </li>
+            <li class="product-row">
+              <div class="product-main">
+                <strong>Salt – Bulk Pack</strong>
+                <div class="product-meta">Regular stock line • Example price</div>
+              </div>
+              <div class="product-actions">
+                <button class="add-to-basket-btn" data-id="rg-salt-bulk" data-name="Salt – Bulk Pack" data-family="Oils & Staples" data-subfamily="Royal Grill Regular Stock" data-price="5.99">Add £5.99</button>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <section id="extras" class="family-block">
+          <h3 class="family-title">Extras & sourcing notes</h3>
+          <p class="family-subtitle">Use the notes section for urgent items, substitutions, brand requests or new lines.</p>
+          <div class="mini-cta">
+            <strong>Tip:</strong> once Royal Grill settles on its regular lines, you can keep refining this page to make repeat orders even faster.
+          </div>
+        </section>
+      </section>
+
+      <section class="card reveal" aria-label="Royal Grill order form">
+        <h2>Send Royal Grill order request</h2>
+        <p class="card-intro">
+          Review the basket, add notes, then send the order request directly to Kourani Market.
+        </p>
+
+        <div id="cartContainer"></div>
+
+        <div class="info-strip">
+          <strong>Business note:</strong> stock, substitutions, final total and delivery details can be confirmed after review.
+        </div>
+
+        <form
+          id="orderForm"
+          method="POST"
+          action="https://formsubmit.co/kouranimarket@gmail.com"
+          autocomplete="off"
+        >
+          <input type="hidden" name="_subject" value="Business client order request – Royal Grill">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="basic">
+          <input type="hidden" name="_next" value="https://kourani-market-ltd.netlify.app/businesses-thank-you.html">
+          <input type="hidden" name="Client business" value="Royal Grill">
+          <input type="hidden" name="Business cart summary" id="cartSummaryField">
+          <input type="hidden" name="Business cart total" id="cartTotalField">
+          <input type="hidden" name="Business cart items count" id="cartItemsCountField">
+
+          <div class="form-group">
+            <label for="contactName">Contact name *</label>
+            <input id="contactName" name="Contact name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Phone *</label>
+            <input id="phone" name="Phone" required>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input id="email" name="Email" type="email" required>
+          </div>
+
+          <div class="form-group">
+            <label for="serviceType">Service needed *</label>
+            <select id="serviceType" name="Service needed" required>
+              <option value="">Choose…</option>
+              <option value="Repeat order">Repeat order</option>
+              <option value="Top-up order">Top-up order</option>
+              <option value="Delivery request">Delivery request</option>
+              <option value="Special sourcing request">Special sourcing request</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="preferredDay">Preferred day</label>
+            <input id="preferredDay" name="Preferred day" value="Friday">
+            <small>Royal Grill usual service day example.</small>
+          </div>
+
+          <div class="form-group">
+            <label for="deliveryType">Collection or delivery?</label>
+            <select id="deliveryType" name="Delivery type">
+              <option value="">Choose…</option>
+              <option value="Collect">Collect</option>
+              <option value="Delivery">Delivery</option>
+            </select>
+          </div>
+
+          <div class="form-group delivery-extra" hidden>
+            <label for="address">Delivery address</label>
+            <textarea id="address" name="Delivery address" rows="2" placeholder="Delivery address if needed"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="notes">Order notes / sourcing notes</label>
+            <textarea id="notes" name="Order notes" rows="5" placeholder="Add substitutions, urgent items, extra stock requests, sourcing needs, or any changes from the usual order."></textarea>
+          </div>
+
+          <div class="mini-cta">
+            <strong>Useful example:</strong> you can now duplicate this Royal Grill page later for other customers like Island Taste or Jollof Spot.
+          </div>
+
+          <button type="submit" class="add-to-basket-btn btn-full">Send Royal Grill order request</button>
+        </form>
+      </section>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <div>
+      <div>Kourani Market Ltd – Royal Grill dedicated order page.</div>
+      <div class="footer-small">Repeat ordering page example for an existing business customer.</div>
+    </div>
+    <div class="footer-small">Farnworth warehouse • Business order flow</div>
+  </div>
+</footer>
+
+<div id="addToast" class="add-toast" aria-live="polite"></div>
+
+<script>
+  const CART_KEY = 'kourani-business-cart-royal-grill';
+
+  function getCart() {
+    const raw = localStorage.getItem(CART_KEY);
+    if (!raw) return [];
+    try {
+      const parsed = JSON.parse(raw);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function saveCart(cart) {
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+  }
+
+  function money(n){ return '£' + Number(n || 0).toFixed(2); }
+
+  function showAddToast(productName) {
+    const toast = document.getElementById('addToast');
+    if (!toast) return;
+    toast.textContent = `“${productName}” added to order`;
+    toast.classList.add('is-visible');
+    clearTimeout(showAddToast._timeout);
+    showAddToast._timeout = setTimeout(() => {
+      toast.classList.remove('is-visible');
+    }, 1400);
+  }
+
+  function addToCart(product) {
+    const cart = getCart();
+    const existing = cart.find(item =>
+      (product.id && item.id === product.id) ||
+      (item.name === product.name && item.family === product.family)
+    );
+
+    if (existing) {
+      existing.qty = (existing.qty || 0) + 1;
+    } else {
+      cart.push({
+        id: product.id || product.name,
+        name: product.name,
+        family: product.family || '',
+        subfamily: product.subfamily || '',
+        price: typeof product.price === 'number' ? product.price : 0,
+        qty: 1
+      });
+    }
+
+    saveCart(cart);
+    renderCart();
+    showAddToast(product.name);
+  }
+
+  function getSubtotal(){
+    return getCart().reduce((sum, item) => sum + ((Number(item.price) || 0) * (Number(item.qty) || 0)), 0);
+  }
+
+  function getItemsCount(){
+    return getCart().reduce((sum, item) => sum + (Number(item.qty) || 0), 0);
+  }
+
+  function updateHiddenFields(){
+    document.getElementById('cartSummaryField').value = buildCartSummary();
+    document.getElementById('cartTotalField').value = getSubtotal().toFixed(2);
+    document.getElementById('cartItemsCountField').value = String(getItemsCount());
+  }
+
+  function buildCartSummary(){
+    const cart = getCart();
+    const lines = [];
+    lines.push('Business order summary');
+    lines.push('Product  Qty  Unit  Subtotal');
+    lines.push('----------------------------------------');
+
+    cart.forEach(item => {
+      const name = [item.name, item.family, item.subfamily].filter(Boolean).join(' / ');
+      const qty = Number(item.qty) || 0;
+      const price = Number(item.price) || 0;
+      const subtotal = qty * price;
+      lines.push(`${name}  ${qty}  £${price.toFixed(2)}  £${subtotal.toFixed(2)}`);
+    });
+
+    lines.push('----------------------------------------');
+    lines.push(`Total items: ${getItemsCount()}`);
+    lines.push(`Estimated total: ${money(getSubtotal())}`);
+    return lines.join('\n');
+  }
+
+  function renderCart(){
+    const container = document.getElementById('cartContainer');
+    const cart = getCart();
+
+    if (!cart.length) {
+      container.innerHTML = '<p class="cart-empty">No products added yet. Add regular items from the list on the left.</p>';
+      updateHiddenFields();
+      return;
+    }
+
+    let html = '<table class="cart-table">';
+    html += '<thead><tr><th>Product</th><th>Qty</th><th>Subtotal</th><th></th></tr></thead><tbody>';
+
+    cart.forEach((item, index) => {
+      const price = Number(item.price) || 0;
+      const qty = Number(item.qty) || 0;
+      const subtotal = price * qty;
+
+      html += `
+        <tr>
+          <td class="product-cell">
+            <strong>${item.name || 'Product'}</strong>
+            <small>${[item.family, item.subfamily].filter(Boolean).join(' / ')}</small>
+            <div class="small-muted">Unit price: ${money(price)}</div>
+          </td>
+          <td>
+            <div class="qty-controls">
+              <button type="button" class="qty-btn" onclick="changeQty(${index}, -1)">−</button>
+              <span class="qty-number">${qty}</span>
+              <button type="button" class="qty-btn" onclick="changeQty(${index}, 1)">+</button>
+            </div>
+          </td>
+          <td>${money(subtotal)}</td>
+          <td><span class="remove-link" onclick="removeItem(${index})">Remove</span></td>
+        </tr>
+      `;
+    });
+
+    html += '</tbody></table>';
+
+    html += '<div class="summary-box">';
+    html += `<div class="summary-line"><span>Items</span><strong>${getItemsCount()}</strong></div>`;
+    html += `<div class="summary-line total"><span>Estimated total</span><strong>${money(getSubtotal())}</strong></div>`;
+    html += '</div>';
+
+    html += `
+      <div class="cart-actions">
+        <button type="button" class="btn btn-soft" onclick="emptyCart()">Clear order</button>
+      </div>
+    `;
+
+    container.innerHTML = html;
+    updateHiddenFields();
+  }
+
+  function changeQty(index, delta){
+    const cart = getCart();
+    if (!cart[index]) return;
+    cart[index].qty = Math.max(0, (Number(cart[index].qty) || 0) + delta);
+    if (cart[index].qty <= 0) cart.splice(index, 1);
+    saveCart(cart);
+    renderCart();
+  }
+
+  function removeItem(index){
+    const cart = getCart();
+    if (!cart[index]) return;
+    cart.splice(index, 1);
+    saveCart(cart);
+    renderCart();
+  }
+
+  function emptyCart(){
+    saveCart([]);
+    renderCart();
+  }
+
+  function toggleDeliveryFields(){
+    const type = document.getElementById('deliveryType').value;
+    const deliveryFields = document.querySelectorAll('.delivery-extra');
+    const isDelivery = type === 'Delivery';
+    deliveryFields.forEach(el => el.hidden = !isDelivery);
+  }
+
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.add-to-basket-btn');
+    if (!btn || btn.closest('#orderForm')) return;
+
+    e.preventDefault();
+
+    addToCart({
+      id: btn.dataset.id || btn.dataset.name,
+      name: btn.dataset.name || 'Business Product',
+      family: btn.dataset.family || '',
+      subfamily: btn.dataset.subfamily || '',
+      price: Number(btn.dataset.price || 0)
+    });
+  });
+
+  document.getElementById('deliveryType').addEventListener('change', toggleDeliveryFields);
+
+  document.getElementById('orderForm').addEventListener('submit', function(e){
+    const cart = getCart();
+    if (!cart.length) {
+      e.preventDefault();
+      alert('Please add at least one product before sending the business order request.');
+      return;
+    }
+    updateHiddenFields();
+  });
+
+  (function revealOnScroll(){
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.querySelectorAll('.reveal').forEach(el => el.classList.add('is-visible'));
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  })();
+
+  renderCart();
+  toggleDeliveryFields();
+</script>
+</body>
+</html>

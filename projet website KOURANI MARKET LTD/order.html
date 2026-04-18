@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Kourani Market Ltd – Basket & Order</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Review your basket and send an order request to Kourani Market Ltd for click & collect or local delivery from Farnworth." />
+
+  <style>
+    :root {
+      --primary: #145c40;
+      --primary-light: #1f8a5f;
+      --accent: #f4b41a;
+      --bg: #f7f7f7;
+      --bg-soft: #eef7f2;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --card-bg: #ffffff;
+      --border: #e5e7eb;
+      --danger: #b91c1c;
+      --ok: #0f7a4f;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top right, rgba(244,180,26,0.14), transparent 24%),
+        radial-gradient(circle at left center, rgba(31,138,95,0.10), transparent 22%),
+        var(--bg);
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    header {
+      background: linear-gradient(135deg, #0f3f2c, #1f8a5f 65%, #2ba36f 100%);
+      color: #fff;
+      padding: 18px 16px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    header::after{
+      content:"";
+      position:absolute;
+      width:320px;height:320px;border-radius:50%;
+      right:-120px;top:-120px;
+      background: rgba(255,255,255,0.08);
+      filter: blur(2px);
+    }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 16px; position: relative; z-index: 1; }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+    .logo-text {
+      font-weight: 800;
+      font-size: 1.2rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #fff;
+    }
+    .logo-img {
+      height: 46px;
+      width: auto;
+      filter: drop-shadow(0 0 10px rgba(255,255,255,0.5));
+    }
+    .nav-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      font-size: 0.92rem;
+    }
+    .nav-links a {
+      color: #e7f6ef;
+      padding: 6px 10px;
+      border-radius: 999px;
+      transition: 0.16s ease-in-out;
+    }
+    .nav-links a:hover { background: rgba(255,255,255,0.12); text-decoration: none; }
+
+    .basket-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+    .basket-count-pill {
+      min-width: 20px; height: 20px; padding: 0 6px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #111;
+      font-size: 0.75rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .page-header {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+    @media (max-width: 820px) { .page-header { grid-template-columns: 1fr; } }
+
+    .hero-copy {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 20px;
+      padding: 20px;
+      backdrop-filter: blur(4px);
+    }
+    .page-kicker {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #d3f2e3;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .page-title {
+      font-size: clamp(1.9rem, 3vw, 2.7rem);
+      line-height: 1.12;
+      margin-bottom: 10px;
+    }
+    .page-subtitle {
+      color: #ebfaf3;
+      font-size: 1rem;
+      max-width: 700px;
+    }
+    .hero-badges {
+      display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px;
+    }
+    .badge {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 6px 11px; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.25);
+      font-size: 0.82rem; color: #f4fffa;
+      background: rgba(255,255,255,0.08);
+    }
+
+    .hero-side {
+      background: #fffdfa;
+      color: var(--text);
+      border-radius: 20px;
+      padding: 18px;
+      border: 1px solid rgba(255,255,255,0.15);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.12);
+      transform: translateY(0);
+      animation: floatCard 4s ease-in-out infinite;
+    }
+    @keyframes floatCard {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+    .hero-side h3 { color: var(--primary); margin-bottom: 8px; font-size: 1.05rem; }
+    .hero-side p { color: var(--muted); font-size: 0.92rem; margin-bottom: 10px; }
+    .hero-list { list-style: none; display: grid; gap: 6px; font-size: 0.92rem; }
+    .hero-list li::before { content: "✓ "; color: var(--primary); font-weight: 800; }
+
+    main { padding: 28px 0 44px; }
+
+    .layout-two {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.95fr);
+      gap: 20px;
+      align-items: start;
+    }
+    @media (max-width: 880px) { .layout-two { grid-template-columns: 1fr; } }
+
+    .card {
+      background: rgba(255,255,255,0.94);
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.8);
+      padding: 18px;
+      box-shadow: 0 10px 30px rgba(15,23,42,0.06);
+      backdrop-filter: blur(8px);
+    }
+    .card h2 { font-size: 1.24rem; margin-bottom: 8px; }
+    .card-intro { font-size: 0.92rem; color: var(--muted); margin-bottom: 12px; }
+
+    .notice-strip {
+      margin-top: 14px;
+      background: linear-gradient(135deg, #fff7de, #fffdf5);
+      border: 1px solid #f6e6a7;
+      border-radius: 14px;
+      padding: 12px 14px;
+      font-size: 0.92rem;
+      color: #5b4b15;
+    }
+
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+    @media (max-width: 640px) { .trust-grid { grid-template-columns: 1fr; } }
+    .trust-item {
+      background: var(--bg-soft);
+      border: 1px solid #dcefe6;
+      border-radius: 14px;
+      padding: 12px;
+      font-size: 0.9rem;
+    }
+    .trust-item strong { display: block; color: var(--primary); margin-bottom: 4px; }
+
+    .cart-empty {
+      font-size: 0.95rem;
+      color: var(--muted);
+      padding: 14px 0 4px;
+    }
+
+    .cart-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+      margin-top: 10px;
+    }
+    .cart-table th,
+    .cart-table td {
+      padding: 10px 6px;
+      text-align: left;
+      border-bottom: 1px solid #edf2f7;
+      vertical-align: top;
+    }
+    .cart-table th {
+      font-size: 0.77rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #64748b;
+    }
+
+    .product-cell strong { display: block; }
+    .product-cell small { color: var(--muted); }
+
+    .qty-controls {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 999px;
+      padding: 3px;
+    }
+    .qty-btn {
+      border-radius: 999px;
+      border: none;
+      width: 28px;
+      height: 28px;
+      background: #fff;
+      cursor: pointer;
+      font-size: 0.95rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+    .qty-number {
+      min-width: 22px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 0.88rem;
+    }
+    .remove-link {
+      color: var(--danger);
+      font-size: 0.82rem;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    .summary-box {
+      margin-top: 14px;
+      border-radius: 14px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      padding: 14px;
+    }
+    .summary-line {
+      display: flex; justify-content: space-between; gap: 10px;
+      font-size: 0.92rem; margin-bottom: 6px;
+    }
+    .summary-line:last-child { margin-bottom: 0; }
+    .summary-line.total {
+      margin-top: 10px; padding-top: 10px; border-top: 1px solid #dbe3ec;
+      font-size: 1rem; font-weight: 800;
+    }
+    .summary-line.discount { color: var(--ok); font-weight: 700; }
+
+    .cart-actions {
+      display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px;
+    }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 10px 16px; border-radius: 999px; border: 1px solid transparent;
+      font-size: 0.92rem; font-weight: 700; cursor: pointer;
+      transition: 0.16s ease-in-out; white-space: nowrap;
+    }
+    .btn-primary { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .btn-primary:hover { background: #0f4b33; transform: translateY(-1px); }
+    .btn-secondary { background: #f3f4f6; color: #111827; border-color: #e5e7eb; }
+    .btn-secondary:hover { background: #e5e7eb; }
+    .btn-soft { background: #ecf7f1; color: var(--primary); border-color: #cfe6dc; }
+    .btn-soft:hover { background: #dff0e8; }
+    .btn-full { width: 100%; }
+
+    .floating-basket {
+      position: fixed; right: 16px; bottom: 16px;
+      background: var(--primary); color: #fff;
+      border-radius: 999px; padding: 10px 14px;
+      display: inline-flex; align-items: center; gap: 8px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+      font-size: 0.92rem; z-index: 1000;
+      cursor: pointer; opacity: 0.97;
+      transition: transform 0.12s ease-out, opacity 0.12s ease-out;
+    }
+    .floating-basket:hover { transform: translateY(-2px); opacity: 1; }
+    .floating-basket-count {
+      min-width: 20px; height: 20px; padding: 0 6px; border-radius: 999px;
+      background: var(--accent); color: #000; font-size: 0.8rem; font-weight: 700;
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+
+    .loyalty-banner {
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #fffdf7, #fff7e6);
+      border: 1px solid #f3e3b5;
+      box-shadow: 0 8px 18px rgba(244,180,26,0.08);
+      font-size: 0.92rem;
+    }
+    .loyalty-banner strong { color: var(--primary); }
+    .small-muted { font-size: 0.82rem; color: var(--muted); }
+
+    .points-box {
+      display: flex; justify-content: space-between; gap: 10px; align-items: center;
+      padding: 12px; border-radius: 14px; background: #f8fafc; border: 1px solid #e2e8f0;
+      flex-wrap: wrap;
+    }
+
+    .form-group { margin-bottom: 12px; }
+    .form-group label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 5px;
+      font-size: 0.92rem;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid #d1d5db;
+      font-family: inherit;
+      font-size: 0.93rem;
+      background: #fff;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary-light);
+      box-shadow: 0 0 0 3px rgba(31,138,95,0.12);
+    }
+    .form-group small { display: block; font-size: 0.82rem; color: var(--muted); margin-top: 4px; }
+
+    .payment-info {
+      margin-bottom: 14px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: #eff6ff;
+      border: 1px solid #dbeafe;
+      color: #1e3a8a;
+      font-size: 0.9rem;
+    }
+
+    .delivery-extra[hidden] { display: none !important; }
+
+    .mini-cta {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: #ecf7f1;
+      border: 1px solid #d7ece1;
+      font-size: 0.9rem;
+    }
+    .mini-cta strong { color: var(--primary); }
+
+    footer {
+      background: #111827;
+      color: #d1d5db;
+      padding: 18px 0;
+      font-size: 0.82rem;
+      margin-top: 28px;
+    }
+    .footer-inner {
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 12px; flex-wrap: wrap;
+    }
+    .footer-small { color: #9ca3af; }
+
+    .reveal {
+      opacity: 0; transform: translateY(18px);
+      transition: opacity 0.45s ease, transform 0.45s ease;
+    }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+  
+    .offer-banner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding: 14px 16px;
+      border-radius: 18px;
+      border: 1px solid #f0dda0;
+      background: linear-gradient(135deg, #fff7df, #fffdf6);
+      box-shadow: 0 10px 24px rgba(244,180,26,0.12);
+      margin-bottom: 18px;
+      animation: pulseOffer 1.8s infinite;
+    }
+
+    @keyframes pulseOffer {
+      0%, 100% { transform: scale(1); box-shadow: 0 10px 24px rgba(244,180,26,0.10); }
+      50% { transform: scale(1.01); box-shadow: 0 14px 28px rgba(244,180,26,0.18); }
+    }
+
+    .offer-banner strong {
+      color: #5b4708;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .offer-banner span {
+      color: #6f5b17;
+      font-size: 0.92rem;
+    }
+
+    .offer-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 800;
+      transition: 0.16s ease-in-out;
+    }
+
+    .offer-btn:hover {
+      background: #0f4b33;
+      transform: translateY(-1px);
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav class="nav">
+        <a href="index.html" class="logo-text" aria-label="Back to home">
+          <img src="kourani-logo.png" alt="Kourani Market Logo" class="logo-img" />
+          Kourani Market
+        </a>
+
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="catalogue.html">Catalogue</a>
+          <a href="products.html">Products</a>
+          <a href="loyalty.html">Rewards</a>
+          <a href="order.html" class="basket-link">
+            <span>🧺 Basket</span>
+            <span class="basket-count-pill" data-basket-count>0</span>
+          </a>
+        </div>
+      </nav>
+
+      <div class="page-header">
+        <div class="hero-copy reveal">
+          <p class="page-kicker">Basket & Order</p>
+          <h1 class="page-title">Place your order with confidence</h1>
+          <p class="page-subtitle">
+            Review your basket, choose click & collect or local delivery, and send your order request to our Farnworth warehouse team.
+            We will confirm availability, final total and collection or delivery details before preparation.
+          </p>
+
+          <div class="hero-badges">
+            <span class="badge">Warehouse-based</span>
+            <span class="badge">Click & collect</span>
+            <span class="badge">Local delivery</span>
+            <span class="badge">B2B & B2C</span>
+          </div>
+        </div>
+
+        <aside class="hero-side reveal">
+          <h3>How ordering works</h3>
+          <p>Simple, practical and local — designed for launch stage and fast service.</p>
+          <ul class="hero-list">
+            <li>Send your basket as an order request</li>
+            <li>We confirm stock and final total</li>
+            <li>Collect in Farnworth or receive local delivery</li>
+            <li>Businesses can add sourcing notes in the order form</li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <section class="offer-banner reveal" aria-label="Offer">
+        <div>
+          <strong>Offer this week</strong>
+          <span>Send your basket now for fast local collection or delivery. Business customers can also use the notes box for sourcing requests.</span>
+        </div>
+        <a href="products.html" class="offer-btn">Add more products</a>
+      </section>
+
+      <div class="trust-grid reveal">
+        <div class="trust-item"><strong>Local service</strong>Based in Farnworth, serving Bolton and nearby areas.</div>
+        <div class="trust-item"><strong>Simple ordering</strong>No complicated checkout — just a clear request and confirmation.</div>
+        <div class="trust-item"><strong>Flexible supply</strong>Restaurants can tell us what they need in the notes.</div>
+      </div>
+
+      <div class="layout-two" style="margin-top:18px;">
+        <section class="card reveal" aria-label="Basket">
+          <h2>Your basket</h2>
+          <p class="card-intro">Check your items, update quantities and review your estimated total before sending your request.</p>
+
+          <div id="cartContainer"></div>
+
+          <div id="loyaltyBannerCart" class="loyalty-banner" aria-live="polite"></div>
+
+          <div class="notice-strip">
+            Prices shown online are an estimate based on the products in your basket. Some items may vary slightly depending on pack size,
+            weight, substitutions or current supply.
+          </div>
+        </section>
+
+        <section class="card reveal" aria-label="Order form">
+          <h2>Order details</h2>
+          <p class="card-intro">Fill in your contact details and tell us whether you want collection or delivery.</p>
+
+          <div class="payment-info">
+            <strong>Payment:</strong> payment is arranged when your order is confirmed. You can pay on collection or on local delivery.
+            We will confirm the final total and practical details before your order is prepared.
+          </div>
+
+          <form
+            id="orderForm"
+            name="order"
+            method="POST"
+            action="https://formsubmit.co/kouranimarket@gmail.com"
+            autocomplete="off"
+          >
+            <input type="hidden" name="form-name" value="order">
+            <input type="hidden" name="_subject" value="🧺 New Kourani Market order request">
+            <input type="hidden" name="cartSummary" id="cartSummaryField">
+            <input type="hidden" name="cartTotal" id="cartTotalField">
+            <input type="hidden" name="cartItemsCount" id="cartItemsCountField">
+            <input type="hidden" name="_next" value="https://kourani-market.netlify.app/order-success.html">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="basic">
+            <input type="hidden" name="_autoresponse" id="autoResponseField" value="">
+
+            <div class="form-group">
+              <label for="customerName">Name *</label>
+              <input id="customerName" name="name" required />
+            </div>
+
+            <div class="form-group">
+              <label for="customerPhone">Phone *</label>
+              <input id="customerPhone" name="phone" required />
+              <small>Used to confirm your order and arrange collection or delivery.</small>
+            </div>
+
+            <div class="form-group">
+              <label for="customerEmail">Email (for your receipt) *</label>
+              <input id="customerEmail" name="email" type="email" required />
+            </div>
+
+            <div class="form-group">
+              <label>Loyalty points (optional)</label>
+              <div class="points-box">
+                <div>
+                  <div class="small-muted">100 points = £3 OFF</div>
+                  <div id="pointsInfo" style="font-weight:700;">Enter your email to load your points.</div>
+                </div>
+                <button type="button" id="usePointsBtn" class="btn btn-secondary">Use my points</button>
+              </div>
+              <small id="pointsMsg"></small>
+            </div>
+
+            <div class="form-group">
+              <label for="voucherCode">Voucher code (optional)</label>
+              <div style="display:flex; gap:8px; align-items:center;">
+                <input id="voucherCode" name="voucherCode" placeholder="Example: KOURANI-..." />
+                <button type="button" id="applyVoucherBtn" class="btn btn-secondary" style="padding:10px 12px;">Apply</button>
+              </div>
+              <small id="voucherMsg"></small>
+            </div>
+
+            <div class="form-group">
+              <label for="deliveryType">Collection or delivery? *</label>
+              <select id="deliveryType" name="deliveryType" required>
+                <option value="">Choose…</option>
+                <option value="collect">Click & collect from Farnworth warehouse</option>
+                <option value="delivery">Local delivery (Bolton & nearby areas)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="address">Address (if delivery)</label>
+              <textarea id="address" name="address" rows="2" placeholder="Your delivery address"></textarea>
+            </div>
+
+            <div class="form-group delivery-extra" hidden>
+              <label for="deliveryDay">Preferred delivery day *</label>
+              <select id="deliveryDay" name="deliveryDay">
+                <option value="">Choose…</option>
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+                <option value="Saturday">Saturday</option>
+              </select>
+            </div>
+
+            <div class="form-group delivery-extra" hidden>
+              <label for="deliveryTimeSlot">Preferred time slot *</label>
+              <select id="deliveryTimeSlot" name="deliveryTimeSlot">
+                <option value="">Choose…</option>
+                <option value="10-12">10:00 – 12:00</option>
+                <option value="12-14">12:00 – 14:00</option>
+                <option value="14-16">14:00 – 16:00</option>
+                <option value="16-18">16:00 – 18:00</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="notes">Notes for your order</label>
+              <textarea id="notes" name="notes" rows="4" placeholder="Examples: Please call before delivery. Green plantain if possible. Business order — can you source extra stock for next week?"></textarea>
+            </div>
+
+            <div id="loyaltyBannerCheckout" class="loyalty-banner" aria-live="polite"></div>
+
+            <div class="mini-cta">
+              <strong>Business customers:</strong> if you need products that are not yet listed, add them in the notes and we will do our best to source them for you.
+            </div>
+
+            <div class="form-group" style="margin-top:12px;">
+              <small>
+                When you submit this form, Kourani Market receives your basket and contact details by email so we can confirm availability,
+                final total and the practical collection or delivery details.
+              </small>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-full">Send order request</button>
+          </form>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-small">Kourani Market Ltd – Food supply warehouse in Farnworth.</div>
+      <div class="footer-small">© <span id="year"></span> Kourani Market</div>
+    </div>
+  </footer>
+
+  <a href="order.html" class="floating-basket" aria-label="View basket and place order">
+    <span>🧺</span>
+    <span>Basket</span>
+    <span class="floating-basket-count" data-basket-count>0</span>
+  </a>
+
+  <script src="cart.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const LOYALTY_KEY = 'kourani-loyalty-profiles';
+    const VOUCHER_VALUE_DEFAULT = 3;
+    let localCart = typeof getCart === 'function' ? getCart() : [];
+    let appliedVoucher = null; // { code, value }
+    let appliedPointsDiscount = null; // { pointsUsed, value }
+
+    function getProfiles(){
+      try {
+        const raw = localStorage.getItem(LOYALTY_KEY);
+        if (!raw) return {};
+        const parsed = JSON.parse(raw);
+        return parsed && typeof parsed === 'object' ? parsed : {};
+      } catch(e){ return {}; }
+    }
+
+    function saveProfiles(profiles){
+      localStorage.setItem(LOYALTY_KEY, JSON.stringify(profiles));
+    }
+
+    function money(n){ return '£' + Number(n || 0).toFixed(2); }
+
+    function getSubtotal(){
+      return (localCart || []).reduce((sum, item) => sum + ((Number(item.price)||0) * (Number(item.qty)||0)), 0);
+    }
+
+    function getDiscountTotal(){
+      return Number(appliedVoucher?.value || 0) + Number(appliedPointsDiscount?.value || 0);
+    }
+
+    function getFinalTotal(){
+      return Math.max(0, getSubtotal() - getDiscountTotal());
+    }
+
+    function getItemsCount(){
+      return (localCart || []).reduce((sum, item) => sum + (Number(item.qty) || 0), 0);
+    }
+
+    function updateLoyaltyBanners(subtotal){
+      const estimatedPoints = Math.floor(Number(subtotal || 0) * 5);
+      const cartBanner = document.getElementById('loyaltyBannerCart');
+      const checkoutBanner = document.getElementById('loyaltyBannerCheckout');
+      const discountText = getDiscountTotal() > 0 ? ` Current discount: <strong>${money(getDiscountTotal())}</strong>.` : '';
+
+      const html = `
+        <strong>⭐ Loyalty rewards</strong><br>
+        This order can earn approximately <strong>${estimatedPoints}</strong> points.${discountText}
+        <div class="small-muted" style="margin-top:4px;">5 points per £1 • 100 points = £3 off • Every 10th order can unlock a voucher</div>
+      `;
+
+      if (cartBanner) cartBanner.innerHTML = html;
+      if (checkoutBanner) checkoutBanner.innerHTML = html;
+    }
+
+    function renderCart(){
+      const container = document.getElementById('cartContainer');
+
+      if (!localCart || localCart.length === 0) {
+        container.innerHTML = '<p class="cart-empty">Your basket is empty. Go back to the products page to add items.</p>';
+        if (typeof updateBasketBadges === 'function') updateBasketBadges(localCart);
+        updateLoyaltyBanners(0);
+        updateHiddenFields();
+        return;
+      }
+
+      let html = '<table class="cart-table">';
+      html += '<thead><tr><th>Product</th><th>Qty</th><th>Subtotal</th><th></th></tr></thead><tbody>';
+
+      localCart.forEach((item, index) => {
+        const price = Number(item.price) || 0;
+        const qty = Number(item.qty) || 0;
+        const subtotal = price * qty;
+
+        html += `
+          <tr>
+            <td class="product-cell">
+              <strong>${item.name || 'Product'}</strong>
+              <small>${[item.family, item.subfamily].filter(Boolean).join(' / ')}</small>
+              <div class="small-muted">Unit price: ${money(price)}</div>
+            </td>
+            <td>
+              <div class="qty-controls">
+                <button type="button" class="qty-btn" onclick="changeQty(${index}, -1)">−</button>
+                <span class="qty-number">${qty}</span>
+                <button type="button" class="qty-btn" onclick="changeQty(${index}, 1)">+</button>
+              </div>
+            </td>
+            <td>${money(subtotal)}</td>
+            <td><span class="remove-link" onclick="removeItem(${index})">Remove</span></td>
+          </tr>
+        `;
+      });
+
+      html += '</tbody></table>';
+
+      const subtotal = getSubtotal();
+      const pointsDiscount = Number(appliedPointsDiscount?.value || 0);
+      const voucherDiscount = Number(appliedVoucher?.value || 0);
+      const total = getFinalTotal();
+
+      html += '<div class="summary-box">';
+      html += `<div class="summary-line"><span>Items</span><strong>${getItemsCount()}</strong></div>`;
+      html += `<div class="summary-line"><span>Subtotal</span><strong>${money(subtotal)}</strong></div>`;
+      if (pointsDiscount > 0) {
+        html += `<div class="summary-line discount"><span>Points discount</span><strong>- ${money(pointsDiscount)}</strong></div>`;
+      }
+      if (voucherDiscount > 0) {
+        html += `<div class="summary-line discount"><span>Voucher discount</span><strong>- ${money(voucherDiscount)}</strong></div>`;
+      }
+      html += `<div class="summary-line total"><span>Estimated total</span><strong>${money(total)}</strong></div>`;
+      html += '</div>';
+
+      html += `
+        <div class="cart-actions">
+          <a class="btn btn-soft" href="products.html">Add more products</a>
+          <button type="button" class="btn btn-secondary" onclick="emptyCart()">Clear basket</button>
+        </div>
+      `;
+
+      container.innerHTML = html;
+      if (typeof updateBasketBadges === 'function') updateBasketBadges(localCart);
+      updateLoyaltyBanners(subtotal);
+      updateHiddenFields();
+    }
+
+    function changeQty(index, delta){
+      if (!localCart[index]) return;
+      localCart[index].qty = Math.max(0, (Number(localCart[index].qty) || 0) + delta);
+      if (localCart[index].qty <= 0) localCart.splice(index, 1);
+      if (typeof saveCart === 'function') saveCart(localCart);
+      renderCart();
+    }
+
+    function removeItem(index){
+      if (!localCart[index]) return;
+      localCart.splice(index, 1);
+      if (typeof saveCart === 'function') saveCart(localCart);
+      renderCart();
+    }
+
+    function emptyCart(){
+      localCart = [];
+      appliedVoucher = null;
+      appliedPointsDiscount = null;
+      if (typeof clearCart === 'function') clearCart();
+      renderCart();
+      document.getElementById('voucherMsg').textContent = '';
+      document.getElementById('pointsMsg').textContent = '';
+      document.getElementById('voucherCode').value = '';
+    }
+
+    function buildCartSummary(){
+      const lines = [];
+      lines.push('Résumé commande');
+      lines.push('Libellé  Qty  Unit  Subtotal');
+      lines.push('----------------------------------------');
+
+      localCart.forEach(item => {
+        const name = [item.name, item.family, item.subfamily].filter(Boolean).join(' / ');
+        const qty = Number(item.qty) || 0;
+        const price = Number(item.price) || 0;
+        const subtotal = qty * price;
+        lines.push(`${name}  ${qty}  £${price.toFixed(2)}  £${subtotal.toFixed(2)}`);
+      });
+
+      lines.push('----------------------------------------');
+      lines.push(`Total articles: ${getItemsCount()}`);
+      lines.push(`Total panier: ${money(getFinalTotal())}`);
+      return lines.join('\n');
+    }
+
+    function buildAutoresponse(order){
+      const lines = (order.cart || []).map(i => `• ${i.name} x${i.qty}`).join('\n');
+      return `Hello ${order.customer.name || ''},\n\nThank you for your order request with Kourani Market.\n\nWe have received your request and will contact you to confirm availability, final total and collection or delivery details.\n\nOrder summary:\n${lines || '-'}\n\nEstimated total: ${money(order.total)}\nOrder type: ${order.delivery.type === 'delivery' ? 'Local delivery' : 'Click & collect'}\n\nThank you,\nKourani Market Ltd`;
+    }
+
+    function updateHiddenFields(){
+      document.getElementById('cartSummaryField').value = buildCartSummary();
+      document.getElementById('cartTotalField').value = getFinalTotal().toFixed(2);
+      document.getElementById('cartItemsCountField').value = String(getItemsCount());
+    }
+
+    function normalizeEmail(email){
+      return String(email || '').trim().toLowerCase();
+    }
+
+    function onEmailChanged(){
+      const email = normalizeEmail(document.getElementById('customerEmail').value);
+      const profiles = getProfiles();
+      const profile = profiles[email];
+      const pointsInfo = document.getElementById('pointsInfo');
+      const pointsMsg = document.getElementById('pointsMsg');
+
+      appliedPointsDiscount = null;
+      if (!email) {
+        pointsInfo.textContent = 'Enter your email to load your points.';
+        pointsMsg.textContent = '';
+        renderCart();
+        return;
+      }
+
+      if (!profile) {
+        pointsInfo.textContent = 'No loyalty profile found for this email yet.';
+        pointsMsg.textContent = '';
+        renderCart();
+        return;
+      }
+
+      const points = Number(profile.points || 0);
+      const vouchers = Array.isArray(profile.vouchers) ? profile.vouchers.filter(v => !v.used) : [];
+      pointsInfo.textContent = `Available points: ${points}${vouchers.length ? ` • Active vouchers: ${vouchers.length}` : ''}`;
+      pointsMsg.textContent = '';
+      renderCart();
+    }
+
+    function applyPoints(){
+      const email = normalizeEmail(document.getElementById('customerEmail').value);
+      const pointsMsg = document.getElementById('pointsMsg');
+      const profiles = getProfiles();
+      const profile = profiles[email];
+
+      if (!email) {
+        pointsMsg.textContent = 'Please enter your email first.';
+        return;
+      }
+      if (!profile) {
+        pointsMsg.textContent = 'No loyalty profile found for this email.';
+        return;
+      }
+
+      const points = Number(profile.points || 0);
+      if (points < 100) {
+        pointsMsg.textContent = 'You need at least 100 points to use a discount.';
+        return;
+      }
+
+      const maxBlocks = Math.floor(points / 100);
+      const pointsUsed = maxBlocks * 100;
+      const value = maxBlocks * 3;
+      appliedPointsDiscount = { pointsUsed, value };
+      pointsMsg.textContent = `Points discount applied: ${pointsUsed} points = ${money(value)}.`;
+      renderCart();
+    }
+
+    function applyVoucher(){
+      const input = document.getElementById('voucherCode');
+      const msg = document.getElementById('voucherMsg');
+      const email = normalizeEmail(document.getElementById('customerEmail').value);
+      const code = String(input.value || '').trim();
+
+      if (!code) {
+        appliedVoucher = null;
+        msg.textContent = 'Enter a voucher code to apply it.';
+        renderCart();
+        return;
+      }
+
+      const profiles = getProfiles();
+      const profile = profiles[email];
+
+      if (profile && Array.isArray(profile.vouchers)) {
+        const found = profile.vouchers.find(v => String(v.code || '').trim().toUpperCase() === code.toUpperCase() && !v.used);
+        if (found) {
+          appliedVoucher = { code: found.code, value: Number(found.value || VOUCHER_VALUE_DEFAULT) };
+          msg.textContent = `Voucher applied: ${found.code} for ${money(appliedVoucher.value)} off.`;
+          renderCart();
+          return;
+        }
+      }
+
+      if (/^KOURANI/i.test(code)) {
+        appliedVoucher = { code, value: VOUCHER_VALUE_DEFAULT };
+        msg.textContent = `Voucher applied: ${money(appliedVoucher.value)} off.`;
+      } else {
+        appliedVoucher = null;
+        msg.textContent = 'Voucher code not recognised.';
+      }
+      renderCart();
+    }
+
+    function toggleDeliveryFields(){
+      const type = document.getElementById('deliveryType').value;
+      const deliveryFields = document.querySelectorAll('.delivery-extra');
+      const address = document.getElementById('address');
+      const day = document.getElementById('deliveryDay');
+      const slot = document.getElementById('deliveryTimeSlot');
+
+      const isDelivery = type === 'delivery';
+      deliveryFields.forEach(el => el.hidden = !isDelivery);
+      address.required = isDelivery;
+      day.required = isDelivery;
+      slot.required = isDelivery;
+
+      if (!isDelivery) {
+        address.value = '';
+        day.value = '';
+        slot.value = '';
+      }
+    }
+
+    function makeVoucherCode(email, orderCount){
+      const prefix = 'KOURANI';
+      const seed = (email || 'LOCAL').replace(/[^A-Za-z0-9]/g, '').toUpperCase().slice(0, 4) || 'SHOP';
+      return `${prefix}-${seed}-${String(orderCount).padStart(2,'0')}`;
+    }
+
+    function persistOrderLoyalty(order){
+      const email = normalizeEmail(order.customer.email);
+      if (!email) return { pointsEarned: 0, pointsUsed: 0 };
+
+      const profiles = getProfiles();
+      const profile = profiles[email] || {
+        firstName: order.customer.name || '',
+        lastName: '',
+        phone: order.customer.phone || '',
+        email,
+        points: 0,
+        orders: 0,
+        vouchers: []
+      };
+
+      const subtotal = Number(order.subtotal || order.total || 0);
+      const earned = Math.floor(subtotal * 5);
+      const usedPoints = Number(order.pointsUsed || 0);
+
+      profile.points = Math.max(0, Number(profile.points || 0) - usedPoints) + earned;
+      profile.orders = Number(profile.orders || 0) + 1;
+      profile.phone = order.customer.phone || profile.phone || '';
+      if (order.customer.name && !profile.firstName) profile.firstName = order.customer.name;
+
+      if (appliedVoucher && Array.isArray(profile.vouchers)) {
+        profile.vouchers = profile.vouchers.map(v => {
+          if (String(v.code || '').toUpperCase() === String(appliedVoucher.code || '').toUpperCase()) {
+            return { ...v, used: true };
+          }
+          return v;
+        });
+      }
+
+      if (profile.orders % 10 === 0) {
+        const newVoucher = {
+          code: makeVoucherCode(email, profile.orders),
+          value: 3,
+          used: false,
+          source: '10th order'
+        };
+        profile.vouchers = Array.isArray(profile.vouchers) ? profile.vouchers : [];
+        profile.vouchers.push(newVoucher);
+      }
+
+      profiles[email] = profile;
+      saveProfiles(profiles);
+      return { pointsEarned: earned, pointsUsed: usedPoints };
+    }
+
+    document.getElementById('customerEmail').addEventListener('input', onEmailChanged);
+    document.getElementById('usePointsBtn').addEventListener('click', applyPoints);
+    document.getElementById('applyVoucherBtn').addEventListener('click', applyVoucher);
+    document.getElementById('deliveryType').addEventListener('change', toggleDeliveryFields);
+
+    document.getElementById('orderForm').addEventListener('submit', function(e){
+      if (!localCart || !localCart.length) {
+        e.preventDefault();
+        alert('Your basket is empty. Please add products before sending your order request.');
+        return;
+      }
+
+      const form = e.currentTarget;
+      const subtotal = getSubtotal();
+      const total = getFinalTotal();
+      const customer = {
+        name: form.name.value.trim(),
+        phone: form.phone.value.trim(),
+        email: normalizeEmail(form.email.value)
+      };
+      const delivery = {
+        type: form.deliveryType.value,
+        address: form.address.value.trim(),
+        day: form.deliveryDay.value,
+        slot: form.deliveryTimeSlot.value,
+        notes: form.notes.value.trim()
+      };
+
+      const order = {
+        customer,
+        delivery,
+        cart: localCart,
+        itemsCount: getItemsCount(),
+        subtotal,
+        total,
+        discountPoints: Number(appliedPointsDiscount?.value || 0),
+        discountVoucher: Number(appliedVoucher?.value || 0),
+        pointsUsed: Number(appliedPointsDiscount?.pointsUsed || 0),
+        voucherCode: appliedVoucher?.code || form.voucherCode.value.trim(),
+        createdAt: new Date().toISOString()
+      };
+
+      const loyaltyResult = persistOrderLoyalty(order);
+      order.pointsEarned = loyaltyResult.pointsEarned;
+      order.pointsUsed = loyaltyResult.pointsUsed;
+
+      const raw = JSON.stringify(order);
+      localStorage.setItem('lastOrder', raw);
+      sessionStorage.setItem('lastOrder', raw);
+
+      updateHiddenFields();
+      document.getElementById('autoResponseField').value = buildAutoresponse(order);
+    });
+
+    (function initReveal(){
+      const els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) {
+        els.forEach(el => el.classList.add('is-visible'));
+        return;
+      }
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      els.forEach(el => obs.observe(el));
+    })();
+
+    renderCart();
+    toggleDeliveryFields();
+  </script>
+</body>
+</html>

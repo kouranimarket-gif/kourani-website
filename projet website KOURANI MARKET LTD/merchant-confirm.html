@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Kourani Market Ltd – Merchant Order Confirmation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Private merchant page to confirm availability, adjust totals, and generate a clean customer confirmation for Kourani Market Ltd." />
+
+  <style>
+    :root{
+      --primary:#145c40;
+      --primary-light:#1f8a5f;
+      --accent:#f4b41a;
+      --accent-soft:#fff7df;
+      --bg:#f7f7f7;
+      --bg-soft:#fbfcfb;
+      --text:#1f2937;
+      --muted:#667085;
+      --card:#ffffff;
+      --border:#e5e7eb;
+      --danger:#b42318;
+      --ok:#027a48;
+      --shadow:0 12px 28px rgba(15, 23, 42, 0.08);
+      --radius:18px;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(31,138,95,.09), transparent 26%),
+        radial-gradient(circle at bottom right, rgba(244,180,26,.08), transparent 22%),
+        var(--bg);
+      color:var(--text);
+      line-height:1.55;
+    }
+
+    a{color:inherit;text-decoration:none;}
+    img{max-width:100%;display:block;}
+
+    header{
+      background:linear-gradient(135deg,#0f3f2c,#1f8a5f);
+      color:#fff;
+      padding:18px 16px 28px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      box-shadow:0 10px 30px rgba(15, 23, 42, .12);
+    }
+
+    .container{max-width:1180px;margin:0 auto;padding:0 16px;}
+
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+      margin-bottom:22px;
+    }
+
+    .logo-text{
+      font-weight:800;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:#fff;
+    }
+
+    .logo-img{
+      height:48px;
+      width:auto;
+      filter:drop-shadow(0 0 8px rgba(255,255,255,.55));
+    }
+
+    .nav-note{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.11);
+      border:1px solid rgba(255,255,255,.18);
+      font-size:.88rem;
+      color:#eef9f2;
+    }
+
+    .hero{
+      display:grid;
+      grid-template-columns:minmax(0, 1.5fr) minmax(320px, .95fr);
+      gap:18px;
+      align-items:stretch;
+    }
+
+    @media (max-width: 900px){
+      .hero{grid-template-columns:1fr;}
+    }
+
+    .hero-main h1{
+      font-size:clamp(1.9rem, 2vw + 1rem, 2.6rem);
+      line-height:1.08;
+      margin-bottom:10px;
+      max-width:800px;
+    }
+
+    .hero-main p{
+      color:#e7f5ee;
+      max-width:760px;
+      font-size:1rem;
+    }
+
+    .hero-badges{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:16px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:7px 11px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.22);
+      background:rgba(255,255,255,.08);
+      font-size:.84rem;
+      color:#f5fff9;
+    }
+
+    .hero-card{
+      background:rgba(255,255,255,.09);
+      border:1px solid rgba(255,255,255,.16);
+      border-radius:20px;
+      padding:16px 18px;
+      backdrop-filter:blur(5px);
+      box-shadow:0 18px 34px rgba(15, 23, 42, .14);
+    }
+
+    .hero-card h2{
+      font-size:1rem;
+      margin-bottom:8px;
+    }
+
+    .hero-list{
+      list-style:none;
+      display:grid;
+      gap:8px;
+      font-size:.94rem;
+      color:#eef9f2;
+    }
+
+    .hero-list li::before{
+      content:"✓ ";
+      color:#ffd76a;
+      font-weight:800;
+    }
+
+    main{padding:28px 0 42px;}
+
+    .grid{
+      display:grid;
+      grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);
+      gap:18px;
+      align-items:start;
+    }
+
+    @media (max-width: 980px){
+      .grid{grid-template-columns:1fr;}
+    }
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:18px;
+      box-shadow:var(--shadow);
+      animation:fadeUp .45s ease-out both;
+    }
+
+    .card:nth-child(2){animation-delay:.08s;}
+
+    @keyframes fadeUp{
+      from{opacity:0;transform:translateY(8px);}
+      to{opacity:1;transform:translateY(0);}
+    }
+
+    .card h2{
+      font-size:1.15rem;
+      margin-bottom:7px;
+      color:#0f172a;
+    }
+
+    .small{font-size:.88rem;color:var(--muted);}
+    .kicker{
+      font-size:.78rem;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      color:var(--primary-light);
+      font-weight:800;
+      margin-bottom:6px;
+    }
+
+    textarea,input,select{
+      width:100%;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid #d0d5dd;
+      font:inherit;
+      font-size:.94rem;
+      background:#fff;
+      color:var(--text);
+      transition:border-color .15s ease, box-shadow .15s ease, transform .15s ease;
+    }
+
+    textarea:focus,input:focus,select:focus{
+      outline:none;
+      border-color:#1f8a5f;
+      box-shadow:0 0 0 4px rgba(31,138,95,.12);
+    }
+
+    textarea{
+      min-height:180px;
+      resize:vertical;
+    }
+
+    label.small{
+      display:block;
+      margin-bottom:5px;
+      font-weight:600;
+      color:#475467;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid transparent;
+      background:var(--primary);
+      color:#fff;
+      font-weight:700;
+      font-size:.92rem;
+      cursor:pointer;
+      transition:transform .14s ease, box-shadow .14s ease, filter .14s ease, background .14s ease;
+      white-space:nowrap;
+      box-shadow:0 10px 24px rgba(20,92,64,.18);
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+      background:#0f4a33;
+      box-shadow:0 14px 26px rgba(20,92,64,.22);
+    }
+
+    .btn-soft{
+      background:#ecf7f1;
+      color:var(--primary);
+      border:1px solid #cfe6dc;
+      box-shadow:none;
+    }
+
+    .btn-soft:hover{
+      background:#dff0e8;
+    }
+
+    .btn-accent{
+      background:var(--accent);
+      color:#111827;
+      box-shadow:0 12px 24px rgba(244,180,26,.22);
+    }
+
+    .btn-accent:hover{
+      background:#ffca47;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      font-size:.92rem;
+      margin-top:10px;
+    }
+
+    th,td{
+      border-bottom:1px solid var(--border);
+      padding:8px 6px;
+      text-align:left;
+      vertical-align:top;
+    }
+
+    th{
+      font-size:.8rem;
+      text-transform:uppercase;
+      letter-spacing:.09em;
+      color:#475467;
+      background:#fafafa;
+      position:sticky;
+      top:0;
+      z-index:1;
+    }
+
+    .table-wrap{
+      overflow:auto;
+      border:1px solid #eef0f2;
+      border-radius:14px;
+      background:#fff;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:4px 9px;
+      border-radius:999px;
+      font-size:.8rem;
+      font-weight:800;
+    }
+
+    .pill-ok{background:#e8f8ef;color:var(--ok);}
+    .pill-no{background:#fef0f0;color:var(--danger);}
+
+    .row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .row > *{
+      flex:1;
+      min-width:180px;
+    }
+
+    .alt-box{
+      display:none;
+      margin-top:8px;
+      padding:10px;
+      border-radius:12px;
+      border:1px dashed #d7dee4;
+      background:#fafcfb;
+    }
+
+    .alt-box .row > *{
+      min-width:140px;
+    }
+
+    .totals{
+      margin-top:10px;
+      display:grid;
+      gap:8px;
+      font-size:.94rem;
+      padding:12px 14px;
+      border-radius:14px;
+      background:linear-gradient(180deg, #fbfdfb, #f6faf8);
+      border:1px solid #e5ece8;
+    }
+
+    .totals .line{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      align-items:flex-start;
+    }
+
+    .totals .line strong{font-weight:800;}
+    .totals .line.total-line{
+      padding-top:8px;
+      margin-top:2px;
+      border-top:1px dashed #d7e4dc;
+      font-size:1.03rem;
+    }
+
+    .hr{
+      height:1px;
+      background:linear-gradient(90deg, transparent, var(--border), transparent);
+      margin:14px 0;
+    }
+
+    .helper-box{
+      margin-top:12px;
+      padding:12px 14px;
+      border-radius:14px;
+      background:var(--accent-soft);
+      border:1px solid #f5d986;
+      font-size:.9rem;
+      color:#5c4600;
+    }
+
+    .helper-box strong{color:#3f3000;}
+
+    .meta-card{
+      display:grid;
+      gap:8px;
+      padding:12px 14px;
+      border-radius:14px;
+      background:var(--bg-soft);
+      border:1px solid #edf1ef;
+      margin-bottom:10px;
+    }
+
+    .meta-card .small strong{color:#111827;}
+
+    .output-wrap{
+      margin-top:10px;
+    }
+
+    .output-wrap textarea{
+      min-height:280px;
+      background:#fbfbfb;
+    }
+
+    .copy-msg{
+      min-height:20px;
+    }
+
+    .private-note{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      padding:12px 14px;
+      border-radius:14px;
+      background:#f8fafc;
+      border:1px solid #e5e7eb;
+      font-size:.9rem;
+      color:#475467;
+      margin-bottom:12px;
+    }
+
+    .private-note span{
+      font-size:1.1rem;
+      line-height:1;
+    }
+
+    footer{
+      background:#111827;
+      color:#d0d5dd;
+      padding:18px 0;
+      font-size:.82rem;
+      margin-top:18px;
+    }
+
+    .footer-inner{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .footer-small{color:#98a2b3;}
+
+    @media (max-width: 640px){
+      header{padding-bottom:22px;}
+      .card{padding:16px 14px;}
+      .btn{width:100%;}
+      .row > *{min-width:100%;}
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <nav class="nav">
+      <div class="logo-text">
+        <img src="kourani-logo.png" alt="Kourani Market Logo" class="logo-img">
+        Kourani Market Ltd – Merchant
+      </div>
+      <div class="nav-note">Private order confirmation page</div>
+    </nav>
+
+    <section class="hero" aria-label="Merchant confirmation overview">
+      <div class="hero-main">
+        <h1>Confirm stock, adjust totals, and send a clean customer update.</h1>
+        <p>
+          This private page helps you review each order request, mark availability, add alternatives,
+          confirm collection or delivery, and generate a professional message for the customer.
+        </p>
+
+        <div class="hero-badges">
+          <span class="badge">Warehouse model</span>
+          <span class="badge">Stock check first</span>
+          <span class="badge">Collection or delivery</span>
+          <span class="badge">Clear customer confirmation</span>
+        </div>
+      </div>
+
+      <aside class="hero-card">
+        <h2>Recommended workflow</h2>
+        <ul class="hero-list">
+          <li>Paste the full FormSubmit email</li>
+          <li>Check availability and alternatives</li>
+          <li>Adjust fees or discount if needed</li>
+          <li>Confirm Farnworth collection or local delivery</li>
+          <li>Copy the final message into Gmail or WhatsApp</li>
+        </ul>
+      </aside>
+    </section>
+  </div>
+</header>
+
+<main>
+  <div class="container grid">
+
+    <section class="card" aria-label="Paste FormSubmit email and confirm stock">
+      <div class="kicker">Step 1</div>
+      <h2>Paste the order email</h2>
+      <p class="small">
+        Copy the full FormSubmit email content you receive and paste it here to load the order.
+      </p>
+
+      <textarea id="rawEmailInput" placeholder="Paste the full FormSubmit email here..."></textarea>
+
+      <div style="margin-top:12px;" class="row">
+        <button class="btn" id="loadOrderBtn">📥 Load order</button>
+        <button class="btn btn-soft" id="clearBtn" type="button">Clear everything</button>
+      </div>
+
+      <div class="hr"></div>
+
+      <div class="kicker">Step 2</div>
+      <h2>Check products and availability</h2>
+      <div id="orderMeta" class="meta-card small" style="display:none;"></div>
+      <div id="itemsTableWrap"></div>
+
+      <div class="hr"></div>
+
+      <div class="kicker">Step 3</div>
+      <h2>Totals and adjustments</h2>
+      <div class="row">
+        <div>
+          <label class="small" for="extraFeesInput">Extra fees</label>
+          <input id="extraFeesInput" type="number" step="0.01" value="0" placeholder="0.00" />
+        </div>
+        <div>
+          <label class="small" for="manualDiscountInput">Manual discount</label>
+          <input id="manualDiscountInput" type="number" step="0.01" value="0" placeholder="0.00" />
+        </div>
+      </div>
+
+      <div class="helper-box">
+        <strong>Tip:</strong> use extra fees for delivery or special handling. Use manual discount only when you want to reduce the final payable amount.
+      </div>
+
+      <div class="totals" id="totalsBox"></div>
+    </section>
+
+    <section class="card" aria-label="Confirm service and generate email">
+      <div class="private-note">
+        <span>🔒</span>
+        <div>
+          This page is for internal use only. It is designed to help you confirm warehouse stock,
+          set the final payable amount, and send a clear update to the customer.
+        </div>
+      </div>
+
+      <div class="kicker">Step 4</div>
+      <h2>Confirm collection or delivery</h2>
+
+      <div class="row">
+        <div>
+          <label class="small" for="confirmMethod">Method</label>
+          <select id="confirmMethod">
+            <option value="collect">Click & collect from Farnworth warehouse</option>
+            <option value="delivery">Local delivery</option>
+          </select>
+        </div>
+        <div>
+          <label class="small" for="confirmDay">Confirmed day</label>
+          <input id="confirmDay" placeholder="e.g. Friday" />
+        </div>
+        <div>
+          <label class="small" for="confirmSlot">Confirmed time slot</label>
+          <input id="confirmSlot" placeholder="e.g. 12:00–14:00" />
+        </div>
+      </div>
+
+      <div style="margin-top:10px;">
+        <label class="small" for="merchantNote">Merchant note to customer (optional)</label>
+        <textarea id="merchantNote" style="min-height:110px;" placeholder="Example: We replaced one item, or your order will be ready for collection after 2pm..."></textarea>
+      </div>
+
+      <div class="hr"></div>
+
+      <div class="kicker">Step 5</div>
+      <h2>Generate customer confirmation</h2>
+      <p class="small">
+        Generate a clean confirmation message, then paste it into Gmail or WhatsApp.
+      </p>
+
+      <div style="margin-top:10px;" class="row">
+        <button class="btn btn-accent" id="generateEmailBtn">✉️ Generate customer message</button>
+      </div>
+
+      <div class="output-wrap">
+        <textarea id="customerEmailOutput" readonly placeholder="Your customer confirmation will appear here..."></textarea>
+
+        <div style="margin-top:10px;" class="row">
+          <button class="btn btn-soft" id="copyEmailBtn" type="button">📋 Copy message</button>
+        </div>
+
+        <div id="copyMsg" class="small copy-msg" style="margin-top:6px;"></div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <div class="footer-small">Kourani Market Ltd – Merchant confirmation tool for warehouse orders.</div>
+    <div class="footer-small">Internal use only</div>
+  </div>
+</footer>
+
+<script src="merchant-confirm.js"></script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Royal Grill – Business Order</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body { font-family: Arial; background:#f7f7f7; padding:20px; }
+.container { max-width:900px; margin:auto; background:#fff; padding:20px; border-radius:10px; }
+h1 { color:#145c40; }
+
+table { width:100%; border-collapse:collapse; margin-bottom:20px; }
+th, td { padding:10px; border-bottom:1px solid #ddd; text-align:left; }
+input[type="number"] { width:60px; }
+
+.total-box { font-size:18px; font-weight:bold; margin-bottom:20px; }
+
+button { padding:12px 20px; background:#145c40; color:#fff; border:none; border-radius:6px; cursor:pointer; }
+
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<h1>Royal Grill – Order Sheet</h1>
+
+<table>
+<thead>
+<tr>
+<th>Product</th>
+<th>Price (£)</th>
+<th>Qty</th>
+<th>Total (£)</th>
+</tr>
+</thead>
+<tbody id="orderTable">
+<tr>
+<td>Chicken Wings 5kg</td>
+<td class="price">20</td>
+<td><input type="number" min="0" value="0" onchange="updateTotals()"></td>
+<td class="lineTotal">0</td>
+</tr>
+
+<tr>
+<td>Plantain Box</td>
+<td class="price">10</td>
+<td><input type="number" min="0" value="0" onchange="updateTotals()"></td>
+<td class="lineTotal">0</td>
+</tr>
+
+<tr>
+<td>Rice 10kg</td>
+<td class="price">15</td>
+<td><input type="number" min="0" value="0" onchange="updateTotals()"></td>
+<td class="lineTotal">0</td>
+</tr>
+</tbody>
+</table>
+
+<div class="total-box">
+Total: £<span id="grandTotal">0</span>
+</div>
+
+<h3>Payment Method</h3>
+<select>
+<option>Cash on delivery</option>
+<option>Card on delivery</option>
+<option>Pay on collection</option>
+</select>
+
+<br><br>
+
+<button onclick="submitOrder()">Submit Order</button>
+
+</div>
+
+<script>
+function updateTotals() {
+let rows = document.querySelectorAll("#orderTable tr");
+let grandTotal = 0;
+
+rows.forEach(row => {
+let price = parseFloat(row.querySelector(".price").innerText);
+let qty = parseInt(row.querySelector("input").value) || 0;
+let total = price * qty;
+row.querySelector(".lineTotal").innerText = total;
+grandTotal += total;
+});
+
+document.getElementById("grandTotal").innerText = grandTotal;
+}
+
+function submitOrder() {
+alert("Order sent (demo)");
+}
+</script>
+
+</body>
+</html>
